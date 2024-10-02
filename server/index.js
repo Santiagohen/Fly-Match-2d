@@ -23,6 +23,14 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
 });
 
+app.get('/sign-up', (req, res) => {
+    res.sendFile('pages/sign-up.html', {root: serverPublic})
+})
+
+app.post('/signed', async(req, res) => {
+    
+})
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
