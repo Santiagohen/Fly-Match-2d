@@ -1,0 +1,8 @@
+[
+    {
+        "userId": 1,
+        "username": "default",
+        "email": "default@email.com",
+        "bookedFlights": []
+    }
+]
