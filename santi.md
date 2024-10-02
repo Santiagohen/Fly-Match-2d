@@ -7,7 +7,7 @@
 
 ## Role and responsability 
 
-1. > Im the backend developer Im in charge of the backend logic and to make sure that the data is saved and displayed.
+1. > Im the backend developer Im in charge of the backend logic and to make sure that the data is saved and displayed. frfr
 
 ## Tomorrow accomplisment 
 
