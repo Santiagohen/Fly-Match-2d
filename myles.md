@@ -12,3 +12,14 @@ Add any keys to the data structure for proper use of information.
 
 ### What was your biggest challenge today?
 Planning with the team, lots of different ideas.
+
+
+## 10/2/24
+### What new challenge arose today?
+None, really.
+
+### What is one resource you are using to learn/research?
+I've been looking up how to hash passwords using bcrypt.
+
+### What is one resource you are using to collaborate better with your teammates?
+We just talk to each other.
