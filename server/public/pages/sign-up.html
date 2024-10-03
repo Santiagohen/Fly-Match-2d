@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form method="POST" action="">
+
+    <label for="create-user-name">New User Name:</label>
+    <input type="text" id="create-user-name" name="create-user-name" required /><br /><br />
+
+    <label for="create-email">New Email:</label>
+    <input type="text" id="create-email" name="create-email" required /><br /><br />
+
+    <input type="submit" value="Submit" />
+    </form>
+    <script>
+              async function fetchUsers() {
+        try {
+          const response = await fetch("/users");
+          if (!response.ok) {
+            throw new Error("Error fetching users. Response not ok");
+          }
+          // there could be an error getting response/fetching the endpoint
+          console.log(response);
+          const users = await response.json();
+          // there could be an error parsing the response
+          // console.log(users);
+          return users;
+        } catch (error) {
+          console.error("There was a problem");
+          console.error(error);
+        }
+      }
+    </script>
+</body>
+</html>

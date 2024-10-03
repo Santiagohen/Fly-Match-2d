@@ -4,7 +4,7 @@
         "admin": false,
         "username": "default",
         "email": "default@email.com",
-        "password": "",
+        "password": "$2b$10$cr6PqSxcXOS2kTBpYqhTjOrNQwXEb67.pXAjPd6xpADnuutLn7L42",
         "bookedFlights": []
     }
 ]
