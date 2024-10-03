@@ -59,7 +59,9 @@ app.post('/signed', async(req, res) => {
         // if (!user.password) {
         //     alert('FAKE');    
         // } 
-        users.push(user)
+        
+        user = { username, email, password};
+        users.push(user);
         console.log(users)
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
         res.redirect('sign-up');
