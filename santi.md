@@ -16,3 +16,23 @@
 ## Biggest Challenge 
 
 1. > My biggest challenge today was getting the run dev nodemon and browser-sync to work.
+
+
+# Day 2
+## What did you accomplish today?
+
+1. > today I was able to finish the login system storing the users in a JSON file
+
+2. > I finished the server side logic for a post method adding users
+
+## Role and responsability 
+
+1. > Im the backend developer Im in charge of the backend logic and to make sure that the data is saved and displayed. frfr
+
+## Tomorrow accomplisment 
+
+2. > Tomorrow I would like to start working on the select flight functionality
+
+## Biggest Challenge 
+
+1. > My biggest challenge today was getting the log in to work

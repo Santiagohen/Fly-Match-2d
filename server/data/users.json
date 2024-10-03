@@ -1,10 +1,3 @@
 [
-    {
-        "userId": 1,
-        "admin": false,
-        "username": "default",
-        "email": "default@email.com",
-        "password": "",
-        "bookedFlights": []
-    }
+  null
 ]
