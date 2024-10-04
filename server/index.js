@@ -39,23 +39,29 @@ app.get('/users', async (req, res) => {
     }
 });
 
+let users = require(dataPath);
+
+function getNextUserId() {
+    if (users.length === 0) {
+        return 1;  // First user gets ID 1
+    }
+    
+    // Find the highest current user ID
+    const lastUserId = users[users.length - 1].id;
+    return lastUserId + 1;
+}
+
 app.get('/sign-up', (req, res) => {
     res.sendFile('pages/sign-up.html', { root: serverPublic })
 })
 
-function generateUserId() {
-    if (users.length === 0) {
-        return 1; // Start with ID 1 if no users exist
-    }
-    const lastUserId = users[users.length - 1].id;
-    return lastUserId + 1; // Increment the last user's ID by 1
-}
 
 
 app.post('/signed', async (req, res) => {
     try {
-        const { username, email, password, id } = req.body
+        const { username, email, password } = req.body
         let users = []
+        
         try {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
@@ -64,13 +70,17 @@ app.post('/signed', async (req, res) => {
             console.error('Error reading user data:', error)
             users = []
         }
-        function generateUserId() {
-            if (users.length === 0) {
-                return 1; // Start with ID 1 if no users exist
-            }
-            const lastUserId = users[users.length - 1].id;
-            return lastUserId + 1; // Increment the last user's ID by 1
-        }
+        // function generateUserId() {
+        //     if (users.length === 0) {
+        //         return 1; // Start with ID 1 if no users exist
+        //     }
+        //     const lastUserId = users[users.length - 1].id;
+        //     return lastUserId + 1;
+
+
+        // }
+        const userId = getNextUserId();
+
 
         
 
@@ -79,8 +89,10 @@ app.post('/signed', async (req, res) => {
         //     alert('FAKE');    
         // } 
         
-        
-        user = { username, email, password };
+      
+        user = {id: userId, username, email, password, };
+      
+
         users.push(user);
         console.log(users)
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
