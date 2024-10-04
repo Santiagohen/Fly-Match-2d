@@ -15,3 +15,13 @@
 > I was using Stack Overflow and a bit of Quora
 # What is 1 resource you are using to collaborate better with your teammates?
 > trying to make sure we are communicating well and everyone knows what everyone is doing.
+
+## DAY 3
+# Do you believe you are giving your best effort to the team?
+> Yes I am giving effort I just don't think I'm doing as much as I can.
+# What is one way you hope to improve your site by the end of the week?
+> Get the accounts set up where it keeps their information.
+# What is one technical challenge that is currently keeping you from moving forward in your project?
+> The accounts keeping their information.
+# What is 1 way you can support your team better moving forward?
+> Try and be more available to help and assist in any way I can.

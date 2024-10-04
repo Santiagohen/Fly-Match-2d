@@ -10,6 +10,7 @@ const app = express();
 // Define paths
 const clientPath = path.join(__dirname, '..', 'client/src');
 const dataPath = path.join(__dirname, 'data', 'users.json');
+const flightDataPath = path.join(__dirname, 'data', 'flights.json');
 const serverPublic = path.join(__dirname, 'public');
 // Middleware setup
 app.use(express.static(clientPath)); // Serve static files from client directory
@@ -24,12 +25,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/sign-up', (req, res) => {
-    res.sendFile('pages/sign-up.html', {root: serverPublic})
+    res.sendFile('pages/sign-up.html', { root: serverPublic })
+})
+app.get('/flights-display', (req, res) => {
+    res.sendFile('pages/flights-display.html', { root: serverPublic })
 })
 
-app.post('/signed', async(req, res) => {
-    
-})
+app.get('/flights', async (req, res) => {
+    try {
+        const data = await fs.readFile(flightDataPath, 'utf8');
+
+        const flights = JSON.parse(data);
+        if (!flights) {
+            throw new Error("Error no flights available");
+        }
+        res.status(200).json(flights);
+    } catch (error) {
+        console.error("Problem getting flights" + error.message);
+        res.status(500).json({ error: "Problem reading flights" });
+    }
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
