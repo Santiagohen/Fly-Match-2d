@@ -2,7 +2,7 @@
   {
     "username": "test-acc",
     "email": "santiagohe75@gmail.com",
-    "password": "hhh"
+    "password": "sss"
   },
   {
     "username": "test-acc",
@@ -10,13 +10,9 @@
     "password": "hhh"
   },
   {
-    "username": "Sherna623",
-    "email": "santiagohes75@gmail.com",
-    "password": "hhh"
-  },
-  {
-    "username": "Sherna623",
-    "email": "santiagohes75@gmail.com",
+    "id": 1,
+    "username": "test-acc",
+    "email": "santiagohe75@gmail.com",
     "password": "hhh"
   }
 ]

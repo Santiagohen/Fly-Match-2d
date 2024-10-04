@@ -36,3 +36,19 @@
 ## Biggest Challenge 
 
 1. > My biggest challenge today was getting the log in to work
+
+# Day 3
+
+## Do you believe you are giving your best effors to the team?
+1. > Yes I would say Im giving my best efforts to the team.
+
+## What is one way you hope to improve your site by the end of the week?
+
+1. > I would like to add a localstorage saving so it keeps track of the login users and displays the information.
+
+## What is one technical challenge that us currently keeping you from moving forward in the project?
+
+1. > One technical problem is the abstract concept of the login and how it will keep in check if the user is logged throught out the oage
+
+## What is one way you can support your team better moving forward?
+1. > I will start working at home to make significant changes and improvement each day.

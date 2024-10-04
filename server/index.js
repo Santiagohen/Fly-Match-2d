@@ -40,27 +40,47 @@ app.get('/users', async (req, res) => {
 });
 
 app.get('/sign-up', (req, res) => {
-    res.sendFile('pages/sign-up.html', {root: serverPublic})
+    res.sendFile('pages/sign-up.html', { root: serverPublic })
 })
 
-app.post('/signed', async(req, res) => {
+function generateUserId() {
+    if (users.length === 0) {
+        return 1; // Start with ID 1 if no users exist
+    }
+    const lastUserId = users[users.length - 1].id;
+    return lastUserId + 1; // Increment the last user's ID by 1
+}
+
+
+app.post('/signed', async (req, res) => {
     try {
-        const {username, email, password, } = req.body
+        const { username, email, password, id } = req.body
         let users = []
         try {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
-         }
-        catch(error) { 
+        }
+        catch (error) {
             console.error('Error reading user data:', error)
             users = []
         }
-        let user = users.find(u => u.username === username && u.email === email && u.password === password);
+        function generateUserId() {
+            if (users.length === 0) {
+                return 1; // Start with ID 1 if no users exist
+            }
+            const lastUserId = users[users.length - 1].id;
+            return lastUserId + 1; // Increment the last user's ID by 1
+        }
+
+        
+
+        // let user = users.find(u => u.username === username && u.email === email && u.password === password);
         // if (!user.password) {
         //     alert('FAKE');    
         // } 
         
-        user = { username, email, password};
+        
+        user = { username, email, password };
         users.push(user);
         console.log(users)
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
@@ -68,9 +88,25 @@ app.post('/signed', async(req, res) => {
         console.log(users);
     } catch (error) {
         console.error('error processing form:', error)
-     }
+    }
 })
+app.get('/sign-in', (req, res) => {
+    res.sendFile('pages/sign-in.html', { root: serverPublic })
+})
+app.post('/login', async (req, res) => {
+    const { username, email, } = req.body;
+    let users = []
+    const data = await fs.readFile(dataPath, 'utf8');
+    users = JSON.parse(data);
+    
+    let user = users.find(u => u.username === username && u.email === email);
+    if (user) {
+        res.status(200).json({ message: 'success' })
 
+    } else {
+        res.status(400).json({ message: 'invalid email or password' })
+    }
+})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
