@@ -3,6 +3,7 @@
         "userId": 1,
         "username": "default",
         "email": "default@email.com",
+        "password": "$2b$10$cr6PqSxcXOS2kTBpYqhTjOrNQwXEb67.pXAjPd6xpADnuutLn7L42",
         "bookedFlights": []
     }
 ]
