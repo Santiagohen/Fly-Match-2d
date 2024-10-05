@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Sign Up</h1>
     <form method="POST" action="">
+      <label for="create-user-name">New Username:</label>
+      <input
+        type="text"
+        id="create-user-name"
+        name="create-user-name"
+        placeholder="Enter Username"
+        required
+      /><br /><br />
 
-    <label for="create-user-name">New User Name:</label>
-    <input type="text" id="create-user-name" name="create-user-name" required /><br /><br />
+      <label for="create-email">New Email:</label>
+      <input
+        type="email"
+        id="create-email"
+        name="create-email"
+        placeholder="Enter Email"
+        required
+      /><br /><br />
 
-    <label for="create-email">New Email:</label>
-    <input type="text" id="create-email" name="create-email" required /><br /><br />
+      <label for="create-password">New Password:</label>
+      <input
+        type="password"
+        id="create-password"
+        name="create-password"
+        placeholder="Enter Password"
+        required
+      /><br /><br />
 
-    <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" />
     </form>
     <script>
-              async function fetchUsers() {
+      async function fetchUsers() {
         try {
           const response = await fetch("/users");
           if (!response.ok) {
@@ -36,5 +56,5 @@
         }
       }
     </script>
-</body>
+  </body>
 </html>
