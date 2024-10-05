@@ -1,10 +1,14 @@
 [
-    {
-        "userId": 1,
-        "admin": false,
-        "username": "default",
-        "email": "default@email.com",
-        "password": "",
-        "bookedFlights": []
-    }
+  {
+    "id": 1,
+    "username": "sherna623",
+    "email": "rafaelje@gmail.com",
+    "password": "Skibbidy"
+  },
+  {
+    "id": 2,
+    "username": "sheLUVxuna",
+    "email": "rafaelje@gmail.com",
+    "password": "Skibbidy"
+  }
 ]

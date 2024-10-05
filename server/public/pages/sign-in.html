@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Sign In</h1>
-    <form method="POST" action="">
+    <form method="POST" action="/login">
       <label for="user-name">User Name:</label>
       <input
         type="text"
@@ -37,6 +37,10 @@
 
       <input type="submit" value="Submit" />
     </form>
+    <h3>Don't Have an account?</h2>
+    <a href="http://localhost:3000/sign-up">
+      <p>Create New Account</p>
+    </a>
     <script>
       async function fetchUsers() {
         try {

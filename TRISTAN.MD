@@ -25,3 +25,13 @@
 > The accounts keeping their information.
 # What is 1 way you can support your team better moving forward?
 > Try and be more available to help and assist in any way I can.
+
+## DAY 4
+# 
+> 
+# 
+> 
+# 
+> 
+# 
+> 
