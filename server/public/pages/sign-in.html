@@ -8,57 +8,126 @@
   <body>
     <h1>Sign In</h1>
     <form method="POST" action="/login">
-      <label for="user-name">User Name:</label>
-      <input
-        type="text"
-        id="user-name"
-        name="user-name"
-        placeholder="Enter Username"
-        required
-      /><br /><br />
 
-      <label for="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Enter Email"
-        required
-      /><br /><br />
+    <label for="username">User Name:
+    <input type="text" id="user-name" name="username" required /><br /><br /> 
+  </label>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required /><br /><br />
 
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Enter Password"
-        required
-      /><br /><br />
+    
 
-      <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" />
     </form>
     <h3>Don't Have an account?</h2>
     <a href="http://localhost:3000/sign-up">
       <p>Create New Account</p>
     </a>
     <script>
-      async function fetchUsers() {
+              async function fetchUsers() {
         try {
+   
           const response = await fetch("/users");
           if (!response.ok) {
             throw new Error("Error fetching users. Response not ok");
           }
+
           // there could be an error getting response/fetching the endpoint
           console.log(response);
           const users = await response.json();
           // there could be an error parsing the response
           // console.log(users);
           return users;
+//           function checkLogin(username, password) {
+//     // Search for a matching user in the userJson array
+//     const user = users.find(user => user.username === username && user.password === password);
+//             if(user){
+//               console.log("hi")
+//             }
+//     // Return true if the user exists, otherwise false
+//     return user ? true : false;
+// }
+
+// // Handle login form submission
+// document.getElementById('login-form').addEventListener('submit', function(event) {
+//     event.preventDefault();
+
+//     const username = document.getElementById('username').value;
+//     const password = document.getElementById('password').value;
+
+//     // Check if the user exists
+//     if (checkLogin(username, password)) {
+//         // Save the user in localStorage if credentials are correct
+//         localStorage.setItem('currentUser', username);
+//         alert('Login successful!');
+//     } else {
+//         alert('Invalid username or password');
+//     }})
+
         } catch (error) {
           console.error("There was a problem");
           console.error(error);
         }
+
       }
+
+
+
+
+// Return true if the user exists, otherwise false
+
+
+document.getElementById('login-form').addEventListener('submit', async function(event) {
+  const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('/users') 
+  
+
+    const result = await response.json();
+  let user = result.find(u => u.username === username && u.password === password)
+    
+  if (user) {
+        // Save username and password to localStorage
+        localStorage.setItem(username, password);
+        // localStorage.setItem('password', password);
+        // window.location.href = '/sign-in';  // Redirect to the sign-in page
+        console.log('hi')
+    } else {
+        console.log("BRUH PLEASE")  // Display the error message
+        alert('Tuelto')
+    }
+
+
+})
+//   let user = users.find(user => user.username === username && user.password === password && id === id);
+//   const username = document.getElementById('username').value
+//   const password = document.getElementById('password').value
+
+//   if(!user){
+//   console.log("On my homies so yk we hope out")
+// }else{
+//   console.log("DAWG FINALLY")
+// }
+// event.preventDefault();
+// console.log("draken");
+
+// if (user) {
+//     // Save to local storage
+//     localStorage.setItem('currentUser', JSON.stringify(user));
+//     console.log('Login successful! User data saved to local storage.');
+//   } else {
+//     console.log('Login failed! Incorrect username or password.');
+//   }
+
+// })   
+// }
+
+// loginSet(username, password);
+
+// const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+// console.log('Logged in user', currentUser)
+   
     </script>
   </body>
 </html>
