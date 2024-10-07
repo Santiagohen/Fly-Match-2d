@@ -93,11 +93,12 @@ document.getElementById('login-form').addEventListener('submit', async function(
         // Save username and password to localStorage
         localStorage.setItem(username, password);
         // localStorage.setItem('password', password);
-        // window.location.href = '/sign-in';  // Redirect to the sign-in page
+        alert('success')
         console.log('hi')
+        window.location.href = '/';  // Redirect to the sign-in page
     } else {
         console.log("BRUH PLEASE")  // Display the error message
-        alert('Tuelto')
+        alert('I hate this')
     }
 
 

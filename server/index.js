@@ -130,6 +130,7 @@ app.post('/login', async (req, res) => {
     if (user) {
         res.status(200).json({ message: 'success' })
         console.log("yeah")
+        res.redirect('sign-in')
         // res.redirect('sign-in');
         
     } else {

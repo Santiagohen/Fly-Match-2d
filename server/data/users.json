@@ -10,5 +10,23 @@
     "username": "sigma",
     "email": "rizzler@gmail,com",
     "password": "ski"
+  },
+  {
+    "id": 3,
+    "username": "Sherna623",
+    "email": "santiagohes75@gmail.com",
+    "password": "skkibidi"
+  },
+  {
+    "id": 4,
+    "username": "Sherna6232",
+    "email": "santiagohe75@gmail.com",
+    "password": "skkibidi"
+  },
+  {
+    "id": 5,
+    "username": "test-acc",
+    "email": "rafaelje@gmail.com",
+    "password": "sss"
   }
 ]
