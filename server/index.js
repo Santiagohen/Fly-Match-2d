@@ -71,7 +71,7 @@ function getNextUserId() {
     if (users.length === 0) {
         return 1;  // First user gets ID 1
     }
-    
+
     // Find the highest current user ID
     const lastUserId = users[users.length - 1].id;
     return lastUserId + 1;
@@ -87,21 +87,21 @@ app.post('/signed', async (req, res) => {
     try {
         const { username, email, password } = req.body
         let users = []
-        
+
         try {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
 
             const userExists = users.some(user => user.email === email || user.username === username);
-           
+
             if (userExists) {
                 console.log("User kinda exists my sigma")
                 return res.status(400);
                 res.redirect('sign-up');
-                
+
             }
-           
-            }
+
+        }
         catch (error) {
             console.error('Error reading user data:', error)
             users = []
@@ -117,17 +117,17 @@ app.post('/signed', async (req, res) => {
         // }
         const userId = getNextUserId();
 
-      
+
 
 
         // let user = users.find(u => u.username === username && u.email === email && u.password === password);
         // if (!user.password) {
         //     alert('FAKE');    
         // } 
-        
-        
-            user = {id: userId, username, email, password, };
-      
+
+
+        user = { id: userId, username, email, password, };
+
 
         users.push(user);
         console.log(users)
@@ -135,7 +135,7 @@ app.post('/signed', async (req, res) => {
         res.redirect('sign-up');
         console.log(users);
         console.log("Hello World")
-        
+
     } catch (error) {
         console.error('error processing form:', error)
     }
@@ -146,30 +146,30 @@ app.get('/sign-in', (req, res) => {
 
 let isLogin = false;
 app.post('/login', async (req, res) => {
-    
-    try {
-    const { username, password } = req.body;
-    let users = []
-    const data = await fs.readFile(dataPath, 'utf8');
-    users = JSON.parse(data);
-    // res.redirect('sign-in');
-    let user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        isLogin = true;
-        res.status(200).json({ message: 'success' })
-        console.log("yeah")
-        console.log(isLogin)
-        res.redirect('sign-in')
 
+    try {
+        const { username, password } = req.body;
+        let users = []
+        const data = await fs.readFile(dataPath, 'utf8');
+        users = JSON.parse(data);
         // res.redirect('sign-in');
-        
-    } else {
-        res.status(400);
-        res.redirect('sign-in')
+        let user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+            isLogin = true;
+            res.status(200).json({ message: 'success' })
+            console.log("yeah")
+            console.log(isLogin)
+            res.redirect('sign-in')
+
+            // res.redirect('sign-in');
+
+        } else {
+            res.status(400);
+            res.redirect('sign-in')
+        }
+
     }
-    
-    }
-    catch(error){}
+    catch (error) { }
 })
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
