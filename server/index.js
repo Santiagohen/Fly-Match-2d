@@ -71,7 +71,7 @@ function getNextUserId() {
     if (users.length === 0) {
         return 1;  // First user gets ID 1
     }
-    
+
     // Find the highest current user ID
     const lastUserId = users[users.length - 1].id;
     return lastUserId + 1;
@@ -81,27 +81,25 @@ app.get('/sign-up', (req, res) => {
     res.sendFile('pages/sign-up.html', { root: serverPublic })
 })
 
-
-
 app.post('/signed', async (req, res) => {
     try {
         const { username, email, password } = req.body
         let users = []
-        
+
         try {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
 
             const userExists = users.some(user => user.email === email || user.username === username);
-           
+
             if (userExists) {
                 console.log("User kinda exists my sigma")
                 return res.status(400);
                 res.redirect('sign-up');
-                
+
             }
-           
-            }
+
+        }
         catch (error) {
             console.error('Error reading user data:', error)
             users = []
@@ -117,17 +115,17 @@ app.post('/signed', async (req, res) => {
         // }
         const userId = getNextUserId();
 
-      
+
 
 
         // let user = users.find(u => u.username === username && u.email === email && u.password === password);
         // if (!user.password) {
         //     alert('FAKE');    
         // } 
-        
-        
-            user = {id: userId, username, email, password, };
-      
+
+
+        user = { id: userId, username, email, password, };
+
 
         users.push(user);
         console.log(users)
@@ -135,7 +133,7 @@ app.post('/signed', async (req, res) => {
         res.redirect('sign-up');
         console.log(users);
         console.log("Hello World")
-        
+
     } catch (error) {
         console.error('error processing form:', error)
     }
@@ -144,27 +142,58 @@ app.get('/sign-in', (req, res) => {
     res.sendFile('pages/sign-in.html', { root: serverPublic })
 })
 app.post('/login', async (req, res) => {
-    
+
     try {
-    const { username, password } = req.body;
-    let users = []
-    const data = await fs.readFile(dataPath, 'utf8');
-    users = JSON.parse(data);
-    // res.redirect('sign-in');
-    let user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        res.status(200).json({ message: 'success' })
-        console.log("yeah")
+        const { username, password } = req.body;
+        let users = []
+        const data = await fs.readFile(dataPath, 'utf8');
+        users = JSON.parse(data);
         // res.redirect('sign-in');
-        
-    } else {
-        res.status(400);
-        res.redirect('sign-in')
+        let user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+            res.status(200).json({ message: 'success' })
+            console.log("yeah")
+            // res.redirect('sign-in');
+
+        } else {
+            res.status(400);
+            res.redirect('sign-in')
+        }
+
     }
-    
-    }
-    catch(error){}
+    catch (error) { }
 })
+app.put('/update-flight/:currentFlightID/:currentOrigin/:currentDestination/:currentDate/:currentTime', async (req, res) => {
+    try {
+        const { currentFlightID, currentOrigin, currentDestination, currentDate, currentTime } = req.params;
+        const { newFlightID, newOrigin, newDestination, newDate, newTime } = req.body;
+        console.log('Current Flight:', { currentFlightID, currentOrigin, currentDestination, currentDate, currentTime });
+        console.log('New Flight:', { newFlightID, newOrigin, newDestination, newDate, newTime });
+        const data = await fs.readFile(dataPath, 'utf8');
+        if (data) {
+            let flights = JSON.parse(data);
+            const flightIndex = flights.findIndex(flight => flight.origin === currentOrigin && flight.destination === currentDestination);
+            console.log(flightIndex);
+            if (flightIndex === -1) {
+                return res.status(404).json({ superPowers: "Flight not found" })
+            }
+            flights[flightIndex] = {
+                ...flights[flightIndex], origin: newOrigin,
+                destination: newDestination,
+                date: newDate,
+                time: newTime
+            };
+            console.log(heroes);
+            await fs.writeFile(dataPath, JSON.stringify(heroes, null, 2));
+
+            res.status(200).json({ superPowers: `You sent ${newSuperHeroName} and ${newUniverse}` });
+        }
+    } catch (error) {
+        console.error('Error updating hero:', error);
+        res.status(500).send('An error occurred while updating the hero.');
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
