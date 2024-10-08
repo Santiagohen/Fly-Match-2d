@@ -37,3 +37,14 @@ Like I said above I was trying to speak about an idea I had but it's a little co
 
 ### What is one way you can support your team better moving forward?
 Communicating better, I suppose.
+
+
+## 10/7/24
+### What is one idea/topic that you have had to revisit from last year while building your project?
+Using localstorage for logging in.
+
+### What is one real world reference web site that you have used to inspire your work on this project? What is it about that site that appeals to you?
+I didn't use any reference as I worked on the backend and there's really no way to see the backend of any running website.
+
+### Have you considered how users with sight disabilities might view your site? Have you taken into account color blindness or poor vision? Do you need to re-examine or recalibrate your sites font sizes or colors?
+I haven't paid too much attention to the design of our site, unfortunately. I was focused on researching login functionality, encrypting passwords, and trying to do the search function for flights.
