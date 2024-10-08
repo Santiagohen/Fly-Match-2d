@@ -27,4 +27,10 @@
 > I could play a bigger part/ assisting with the background code, or complete the entire skeleton for the project on canva
 > so if someone finishes there section they could start on the CSS
 
-## 10-4
+## 10-7
+# What is one idea/topic that you have had to revisit from last year while building your project?
+> responsive design and just other random small CSS code
+# What is one real world reference web site that you have used to inspire your work on this project? What is it about that site that appeals to you?
+> Priceline, they have some really nice features and an overall good design
+# Have you considered hwo users with sight disabilities might view your site? Have you taken into account color blindness or poor vision? Do you need to reexamine or recalibrate your sites font sizes or color?
+> Our site isn't really dependent on color, a person with some kind of color blindness should be able to work the site with no real problem. 

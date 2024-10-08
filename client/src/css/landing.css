@@ -5,7 +5,7 @@ body {
     background-color: lightyellow;
 }
 header {
-    /* position: sticky; */
+    position: sticky;
     display: flex;
     z-index: 100000;
     justify-content: center;
