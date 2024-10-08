@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flights-Display</title>
+    <style>
+      #flightTable {
+  margin: auto;
+  width: 48%;
+  border-collapse: collapse; /* Optional: for cleaner table borders */
+}
+
+#flightTable th, #flightTable td {
+  text-align: center; /* Center content in table cells */
+  padding: 10px; /* Add some padding for better spacing */
+  border: 1px solid #000000; /* Optional: Add borders to cells */
+}
+
+    </style>
+  </head>
+  <body>
+    <table id="flightTable">
+      <thead>
+        <tr>
+          <th>Origin:</th>
+          <th>Destination:</th>
+          <th>Date:</th>
+          <th>Time:</th>
+          <th>Book Now</th>
+        </tr>
+      </thead>
+      <tbody id="flightTableBody">
+        <!-- data of users will be rendered here -->
+      </tbody>
+    </table>
+    <script>
+      async function fetchFlights() {
+        try {
+          const response = await fetch("/flights");
+          if (!response.ok) {
+            throw new Error("Error fetching flights. Response not ok");
+          }
+          console.log(response);
+          const flights = await response.json();
+          return flights;
+        } catch (error) {
+          console.error("There was a problem");
+          console.error(error);
+        }
+      }
+      async function renderFlights() {
+        const tableBody = document.getElementById("flightTableBody");
+        tableBody.innerHTML = "";
+        try {
+          const flights = await fetchFlights();
+          if (Array.isArray(flights) && flights.length > 0) {
+            flights.forEach((flight) => {
+              const row = `<tr><td>${flight.origin}</td><td>${flight.destination}</td><td>${flight.date}</td><td>${flight.time}</td><td><button>BOOK</button></td></tr>`;
+              tableBody.innerHTML += row;
+            });
+          }
+        } catch (error) {}
+      }
+      document.addEventListener("DOMContentLoaded", renderFlights);
+    </script>
+  </body>
+</html>

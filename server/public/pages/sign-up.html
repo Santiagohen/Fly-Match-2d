@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
 
     <style>
@@ -15,11 +15,23 @@
     <h1>Sign Up</h1>
     <form action="/signed" method="POST" id="sign-in-form" >
 
-    <label for="username">New Username:</label>
-    <input type="text" id="username" name="username" required /><br /><br />
+      <label for="create-email">New Email:</label>
+      <input
+        type="email"
+        id="create-email"
+        name="create-email"
+        placeholder="Enter Email"
+        required
+      /><br /><br />
 
-    <label for="email">New Email:</label>
-    <input type="text" id="email" name="email" required /><br /><br />
+      <label for="create-password">New Password:</label>
+      <input
+        type="password"
+        id="create-password"
+        name="create-password"
+        placeholder="Enter Password"
+        required
+      /><br /><br />
 
     <label for="password">New Password:</label>
     <input type="password" id="password" name="password" required /><br /><br />
@@ -29,7 +41,7 @@
     <p id="soy-yo">Hi </p>
     </form>
     <script>
-              async function fetchUsers() {
+      async function fetchUsers() {
         try {
           const response = await fetch("/users");
           if (!response.ok) {
@@ -64,12 +76,12 @@
           document.getElementById('soy-yo').style.display = "block";
           window.location.href = 'sign-up';
           alert('user already exists')
-          console.log('yo vengo del barrio');
+          console.log('hehehehahaha');
         }
 
       })
 
       
     </script>
-</body>
+  </body>
 </html>

@@ -25,7 +25,7 @@
     
      
 
-              
+              let isLogin = false;
           async function fetchUsers() {
         try {
    
@@ -91,14 +91,17 @@ document.getElementById('login-form').addEventListener('submit', async function(
     
   if (user) {
         // Save username and password to localStorage
-        localStorage.setItem(username, password);
+        localStorage.setItem('username', username);
         // localStorage.setItem('password', password);
+        isLogin = true;
+        console.log(isLogin)
         alert('success')
         console.log('hi')
+        
         window.location.href = '/';  // Redirect to the sign-in page
     } else {
         console.log("BRUH PLEASE")  // Display the error message
-        alert('I hate this')
+        alert('user not found')
     }
 
 

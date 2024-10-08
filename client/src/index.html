@@ -6,7 +6,22 @@
     <title>Home Page</title>
   </head>
   <body>
-    Hello World!!!
-   
+    Search For Flights
+    <a href="http://localhost:3000/sign-in">
+      <button id="button-to-sign-in">BOOK NOW</button>
+</a>
+    <script>
+      const buttonToPages = document.getElementById('button-to-sign-in');
+      buttonToPages.addEventListener("click", (e) => {
+        let username = localStorage.getItem('username')
+        if(username){
+          alert('PLEASE')
+          console.log(username)
+        }else {
+    // Do something else if the key does not exist or the value is null
+    console.log("The item does not exist in localStorage.");
+}
+      });
+    </script>
   </body>
 </html>

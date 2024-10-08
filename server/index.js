@@ -11,6 +11,7 @@ const app = express();
 // Define paths
 const clientPath = path.join(__dirname, '..', 'client/src');
 const dataPath = path.join(__dirname, 'data', 'users.json');
+const flightDataPath = path.join(__dirname, 'data', 'flights.json');
 const serverPublic = path.join(__dirname, 'public');
 // Middleware setup
 app.use(express.static(clientPath)); // Serve static files from client directory
@@ -24,6 +25,30 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
 });
 
+app.get('/sign-up', (req, res) => {
+    res.sendFile('pages/sign-up.html', { root: serverPublic })
+})
+app.get('/flights-display', (req, res) => {
+    res.sendFile('pages/flights-display.html', { root: serverPublic })
+})
+app.get('/admin', (req, res) => {
+    res.sendFile('pages/admin.html', { root: serverPublic })
+})
+
+app.get('/flights', async (req, res) => {
+    try {
+        const data = await fs.readFile(flightDataPath, 'utf8');
+
+        const flights = JSON.parse(data);
+        if (!flights) {
+            throw new Error("Error no flights available");
+        }
+        res.status(200).json(flights);
+    } catch (error) {
+        console.error("Problem getting flights" + error.message);
+        res.status(500).json({ error: "Problem reading flights" });
+    }
+});
 
 app.get('/users', async (req, res) => {
     try {
@@ -118,6 +143,8 @@ app.post('/signed', async (req, res) => {
 app.get('/sign-in', (req, res) => {
     res.sendFile('pages/sign-in.html', { root: serverPublic })
 })
+
+let isLogin = false;
 app.post('/login', async (req, res) => {
     
     try {
@@ -128,9 +155,12 @@ app.post('/login', async (req, res) => {
     // res.redirect('sign-in');
     let user = users.find(u => u.username === username && u.password === password);
     if (user) {
+        isLogin = true;
         res.status(200).json({ message: 'success' })
         console.log("yeah")
+        console.log(isLogin)
         res.redirect('sign-in')
+
         // res.redirect('sign-in');
         
     } else {
