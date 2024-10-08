@@ -7,101 +7,76 @@
 </head>
 <body>
     <h1>Sign In</h1>
-    <form method="POST"  action="/login" id="login-form">
+    <form id="login-form">
+      <label for="username">User Name: </label>
+      <input type="text" id="username" name="username" required /><br /><br /> 
 
-    <label for="username">User Name: </label>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required /><br /><br />
     
-    <input type="text" id="username" name="username" required /><br /><br /> 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required /><br /><br />
-  
-
-    
-
-    <input type="submit" onclick="loginSet()" value="Submit" />
+      <input type="submit" />
     </form>
-    <script>
-       
-    
-     
 
-              
-          async function fetchUsers() {
+    <script> 
+      async function fetchUsers() {
         try {
-   
           const response = await fetch("/users");
+
           if (!response.ok) {
             throw new Error("Error fetching users. Response not ok");
           }
 
           // there could be an error getting response/fetching the endpoint
-          console.log(response);
           const users = await response.json();
-          // there could be an error parsing the response
-          // console.log(users);
           return users;
-//           function checkLogin(username, password) {
-//     // Search for a matching user in the userJson array
-//     const user = users.find(user => user.username === username && user.password === password);
-//             if(user){
-//               console.log("hi")
-//             }
-//     // Return true if the user exists, otherwise false
-//     return user ? true : false;
-// }
-
-// // Handle login form submission
-// document.getElementById('login-form').addEventListener('submit', function(event) {
-//     event.preventDefault();
-
-//     const username = document.getElementById('username').value;
-//     const password = document.getElementById('password').value;
-
-//     // Check if the user exists
-//     if (checkLogin(username, password)) {
-//         // Save the user in localStorage if credentials are correct
-//         localStorage.setItem('currentUser', username);
-//         alert('Login successful!');
-//     } else {
-//         alert('Invalid username or password');
-//     }})
-
         } catch (error) {
-          console.error("There was a problem");
-          console.error(error);
+          console.error("There was a problem", error);
         }
-
       }
 
+      document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
+        try {
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
 
+          const response = await fetch('/login', {
+            method: "POST",
+            "headers": {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password })
+          });
 
-// Return true if the user exists, otherwise false
+          const data = await response.json();
+        
+          if (data) {
+            localStorage.setItem("activeUser", {data});
+            window.location = "/"
+          } else {
+            
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
 
-
-document.getElementById('login-form').addEventListener('submit', async function(event) {
-  const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    const response = await fetch('/users') 
-  
-
-    const result = await response.json();
-  let user = result.find(u => u.username === username && u.password === password)
+  //   const result = await response.json();
+  // let user = result.find(u => u.username === username && u.password === password)
     
-  if (user) {
-        // Save username and password to localStorage
-        localStorage.setItem(username, password);
-        // localStorage.setItem('password', password);
-        // window.location.href = '/sign-in';  // Redirect to the sign-in page
-        console.log('hi')
-    } else {
-        console.log("BRUH PLEASE")  // Display the error message
-        alert('Tuelto')
-    }
+  // if (user) {
+  //       // Save username and password to localStorage
+  //       localStorage.setItem(username, password);
+  //       // localStorage.setItem('password', password);
+  //       // window.location.href = '/sign-in';  // Redirect to the sign-in page
+  //       console.log('hi')
+  //   } else {
+  //       console.log("BRUH PLEASE")  // Display the error message
+  //       alert('Tuelto')
+  //   }
 
 
-})
+        });
 //   let user = users.find(user => user.username === username && user.password === password && id === id);
 //   const username = document.getElementById('username').value
 //   const password = document.getElementById('password').value

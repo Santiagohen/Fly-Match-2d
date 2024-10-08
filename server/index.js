@@ -1,9 +1,9 @@
 // index.js
 // Required modules
-const { Console } = require('console');
 const express = require('express');
 const path = require('path');
 const fs = require('fs').promises;
+const bcrypt = require('bcrypt');
 
 // Initialize Express application
 const app = express();
@@ -40,23 +40,22 @@ app.get('/users', async (req, res) => {
     }
 });
 
-let users = require(dataPath);
+// don't need this whole thing
+// let users = require(dataPath);
 
-function getNextUserId() {
-    if (users.length === 0) {
-        return 1;  // First user gets ID 1
-    }
+// function getNextUserId() {
+//     if (users.length === 0) {
+//         return 1;  // First user gets ID 1
+//     }
     
-    // Find the highest current user ID
-    const lastUserId = users[users.length - 1].id;
-    return lastUserId + 1;
-}
+//     // Find the highest current user ID
+//     const lastUserId = users[users.length - 1].id;
+//     return lastUserId + 1;
+// }
 
 app.get('/sign-up', (req, res) => {
     res.sendFile('pages/sign-up.html', { root: serverPublic })
 })
-
-
 
 app.post('/signed', async (req, res) => {
     try {
@@ -67,79 +66,74 @@ app.post('/signed', async (req, res) => {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
 
-            const userExists = users.some(user => user.email === email || user.username === username);
+            const user = users.some(user => user.email === email || user.username === username);
            
-            if (userExists) {
-                console.log("User kinda exists my sigma")
-                return res.status(400);
+            if (user) {
+                console.log("Existing username or email, retry");
                 res.redirect('sign-up');
-                
+                return res.status(400);
             }
-           
-            }
-        catch (error) {
+        } catch (error) {
             console.error('Error reading user data:', error)
             users = []
         }
-        // function generateUserId() {
-        //     if (users.length === 0) {
-        //         return 1; // Start with ID 1 if no users exist
-        //     }
-        //     const lastUserId = users[users.length - 1].id;
-        //     return lastUserId + 1;
 
+        const hashedPassword = await bcrypt.hash(password, 10).then(hash => {
+            return hash;
+        }).catch(error => console.error(error.message));
 
-        // }
-        const userId = getNextUserId();
-
-      
-
-
-        // let user = users.find(u => u.username === username && u.email === email && u.password === password);
-        // if (!user.password) {
-        //     alert('FAKE');    
-        // } 
+        let userId = users.length + 1;
         
-        
-            user = {id: userId, username, email, password, };
-      
-
+        user = { userId, admin: false, username, email, password: hashedPassword, bookedFlights: [] };
         users.push(user);
-        console.log(users)
+
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
         res.redirect('sign-up');
-        console.log(users);
-        console.log("Hello World")
-        
     } catch (error) {
         console.error('error processing form:', error)
     }
-})
+});
+
 app.get('/sign-in', (req, res) => {
     res.sendFile('pages/sign-in.html', { root: serverPublic })
-})
+});
+
 app.post('/login', async (req, res) => {
-    
     try {
-    const { username, password } = req.body;
-    let users = []
-    const data = await fs.readFile(dataPath, 'utf8');
-    users = JSON.parse(data);
-    // res.redirect('sign-in');
-    let user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        res.status(200).json({ message: 'success' })
-        console.log("yeah")
-        // res.redirect('sign-in');
+        const { username, password } = req.body;
+
+        let users = []
+
+        const data = await fs.readFile(dataPath, 'utf8');
+        users = JSON.parse(data);
         
-    } else {
-        res.status(400);
-        res.redirect('sign-in')
-    }
+        let user = users.find(u => u.username === username);
+
+        if (user) {
+            // compare submitted password to stored hashed password
+            const validatedLogin = await bcrypt.compare(password, user.password).then(res => {
+                return res;
+            }).catch(error => console.error(error.message));
+
+            if (validatedLogin) {
+                console.log("Valid login credentials");
+
+                // delete data the client should not store
+                delete user.password;
+                delete user.userId;
+
+                // send user object to client for storing in localstorage
+                res.status(200).send(user);
+            }
+        } else {
+            res.status(400);
+            res.redirect('sign-in')
+        }
     
+    } catch (error) {
+        console.error(error.message)
     }
-    catch(error){}
-})
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
