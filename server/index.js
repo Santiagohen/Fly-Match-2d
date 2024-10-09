@@ -189,19 +189,16 @@ app.post('/login', async (req, res) => {
     }
     catch (error) { }
 })
-app.put('/update-flight/:currentOrigin/:currentDestination/:currentDate/:currentTime', async (req, res) => {
+app.put('/update-flight/:currentId', async (req, res) => {
     try {
-        const { currentOrigin, currentDestination, currentDate, currentTime } = req.params;
+        const { currentId } = req.params;
         const { newOrigin, newDestination, newDate, newTime } = req.body;
 
         const data = await fs.readFile(flightDataPath, 'utf8');
         const flights = JSON.parse(data);
 
         const flightIndex = flights.findIndex(flight =>
-            flight.origin === currentOrigin &&
-            flight.destination === currentDestination &&
-            flight.date === currentDate &&
-            flight.time === currentTime
+            flight.flightId === parseInt(currentId)
         );
 
         if (flightIndex === -1) {
@@ -224,21 +221,19 @@ app.put('/update-flight/:currentOrigin/:currentDestination/:currentDate/:current
     }
 });
 
-app.delete('/flight/:origin/:destination/:date/:time', async (req, res) => {
+app.delete('/delete-flight/:flightId', async (req, res) => {
     try {
-        const { origin, destination, date, time } = req.params;
-
+        const { flightId } = req.params;
+        console.log("fid", flightId)
+        console.log(typeof flightId)
         const data = await fs.readFile(flightDataPath, 'utf8');
         const flights = JSON.parse(data);
-
+        console.log(flights)
         // Find the index of the flight to delete
         const flightIndex = flights.findIndex(flight =>
-            flight.origin === origin &&
-            flight.destination === destination &&
-            flight.date === date &&
-            flight.time === time
+            flight.flightId === parseInt(flightId)
         );
-
+        console.log("findex", flightIndex)
         if (flightIndex === -1) {
             return res.status(404).json({ message: "Flight not found" });
         }
@@ -248,6 +243,7 @@ app.delete('/flight/:origin/:destination/:date/:time', async (req, res) => {
 
         // Write the updated flights back to the file
         await fs.writeFile(flightDataPath, JSON.stringify(flights, null, 2));
+
         res.status(200).json({ message: "Flight deleted successfully" });
     } catch (error) {
         console.error('Error deleting flight:', error);
