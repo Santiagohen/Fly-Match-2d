@@ -11,10 +11,7 @@
     </div>
     <div id="flight-forms">
       <h1>Create Flight:</h1>
-      <form method="POST" class="flight-form">
-        <label for="new-flight-id">Flight ID:</label>
-        <input type="text" id="new-flight-id" required /><br /><br />
-
+      <form method="POST" class="flight-form" id="createFlightForm">
         <label for="new-origin">Origin:</label>
         <input type="text" id="new-origin" required /><br /><br />
 
@@ -31,9 +28,6 @@
       </form>
       <h1>Flight Editor</h1>
       <form id="updateForm" class="flight-form">
-        <label for="currentFlightID">Current Flight ID:</label>
-        <input type="text" id="currentFlightID" required /><br /><br />
-
         <label for="currentOrigin">Current Origin:</label>
         <input type="text" id="currentOrigin" required /><br /><br />
 
@@ -45,9 +39,6 @@
 
         <label for="currentTime">Current Time:</label>
         <input type="text" id="currentTime" required /><br /><br />
-
-        <label for="newFlightID">New Flight ID:</label>
-        <input type="text" id="newFlightID" required /><br /><br />
 
         <label for="newOrigin">New Origin:</label>
         <input type="text" id="newOrigin" required /><br /><br />
@@ -68,9 +59,6 @@
       <div id="delete-flights">
         <h2>Delete Flights</h2>
         <form id="delete-flights-form">
-          <label for="delete-flightId">FlightID:</label>
-          <input type="text" id="delete-flightId" /><br /><br />
-
           <label for="delete-origin">Origin:</label>
           <input type="text" id="delete-origin" /><br /><br />
 
@@ -100,36 +88,58 @@
         <tbody id="flightTableBodyAdmin"></tbody>
       </table>
     </div>
-    <!-- <div id="footer"></div> -->
     <script>
+      document
+        .getElementById("createFlightForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const origin = document.getElementById("new-origin").value;
+          const destination = document.getElementById("new-destination").value;
+          const date = document.getElementById("new-date").value;
+          const time = document.getElementById("new-time").value;
+
+          try {
+            const response = await fetch("/create-flight", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ origin, destination, date, time }),
+            });
+
+            const data = await response.json();
+            console.log(data);
+            renderFlightsAdmin(); // Refresh the flight list
+          } catch (error) {
+            console.error("Error creating flight: " + error);
+          }
+        });
+
       document
         .getElementById("updateForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
-          const currentFlightID =
-            document.getElementById("currentFlightID").value;
           const currentOrigin = document.getElementById("currentOrigin").value;
           const currentDestination =
-            document.getElementById("currentOrigin").value;
-          const currentDate = document.getElementById("currentOrigin").value;
+            document.getElementById("currentDestination").value;
+          const currentDate = document.getElementById("currentDate").value;
           const currentTime = document.getElementById("currentTime").value;
 
-          const newFlightID = document.getElementById("newFlightID").value;
           const newOrigin = document.getElementById("newOrigin").value;
-          const newDestination = document.getElementById("newOrigin").value;
-          const newDate = document.getElementById("newOrigin").value;
+          const newDestination =
+            document.getElementById("newDestination").value;
+          const newDate = document.getElementById("newDate").value;
           const newTime = document.getElementById("newTime").value;
 
           try {
             const response = await fetch(
-              `/update-flight/${currentFlightID}/${currentOrigin}/${currentDestination}/${currentDate}/${currentTime}`,
+              `/update-flight/${currentOrigin}/${currentDestination}/${currentDate}/${currentTime}`,
               {
                 method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  newFlightID,
                   newOrigin,
                   newDestination,
                   newDate,
@@ -137,12 +147,12 @@
                 }),
               }
             );
+
             const data = await response.json();
             console.log(data);
-            renderFlight();
-            // alert("Message is: " + data.message);
+            renderFlightsAdmin();
           } catch (error) {
-            alert("Error updating flight: ");
+            console.log("Error updating flight: " + error);
           }
         });
 
@@ -150,33 +160,33 @@
         .getElementById("delete-flights-form")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
-          const flightID = document.getElementById("delete-flightId").value;
           const flightOrigin = document.getElementById("delete-origin").value;
           const flightDestination =
             document.getElementById("delete-destination").value;
           const flightDate = document.getElementById("delete-date").value;
           const flightTime = document.getElementById("delete-time").value;
+
           try {
             const response = await fetch(
-              `/flight/${flightID}/${flightOrigin}/${flightDestination}/${flightDate}/${flightTime}`,
+              `/flight/${flightOrigin}/${flightDestination}/${flightDate}/${flightTime}`,
               {
                 method: "DELETE",
               }
             );
+
             if (!response.ok) {
               throw new Error("Problem fetching delete endpoint");
             }
-            const data = await response.text();
-            // console.log(data);
-            renderFlightsAdmin();
+
+            await response.json(); // Process the response
+            renderFlightsAdmin(); // Refresh the flight list
           } catch (error) {
             console.error(
-              "there was a problem, skill issue" +
-                error.message +
-                "GG bro. Keep mogging."
+              "There was a problem deleting the flight: " + error.message
             );
           }
         });
+
       async function renderFlightsAdmin() {
         const tableBody = document.getElementById("flightTableBodyAdmin");
         tableBody.innerHTML = "";
@@ -188,22 +198,23 @@
               tableBody.innerHTML += row;
             });
           }
-        } catch (error) {}
+        } catch (error) {
+          console.error("Error rendering flights: " + error);
+        }
       }
+
       async function fetchFlights() {
         try {
           const response = await fetch("/flights");
           if (!response.ok) {
             throw new Error("Error fetching flights. Response not ok");
           }
-          console.log(response);
-          const flights = await response.json();
-          return flights;
+          return await response.json();
         } catch (error) {
-          console.error("There was a problem");
-          console.error(error);
+          console.error("There was a problem fetching flights: " + error);
         }
       }
+
       document.addEventListener("DOMContentLoaded", renderFlightsAdmin);
     </script>
   </body>
