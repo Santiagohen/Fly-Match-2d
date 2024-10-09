@@ -18,22 +18,6 @@
     </form>
 
     <script> 
-      async function fetchUsers() {
-        try {
-          const response = await fetch("/users");
-
-          if (!response.ok) {
-            throw new Error("Error fetching users. Response not ok");
-          }
-
-          // there could be an error getting response/fetching the endpoint
-          const users = await response.json();
-          return users;
-        } catch (error) {
-          console.error("There was a problem", error);
-        }
-      }
-
       document.getElementById('login-form').addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -60,51 +44,7 @@
         } catch (error) {
           console.error(error.message);
         }
-
-  //   const result = await response.json();
-  // let user = result.find(u => u.username === username && u.password === password)
-    
-  // if (user) {
-  //       // Save username and password to localStorage
-  //       localStorage.setItem(username, password);
-  //       // localStorage.setItem('password', password);
-  //       // window.location.href = '/sign-in';  // Redirect to the sign-in page
-  //       console.log('hi')
-  //   } else {
-  //       console.log("BRUH PLEASE")  // Display the error message
-  //       alert('Tuelto')
-  //   }
-
-
-        });
-//   let user = users.find(user => user.username === username && user.password === password && id === id);
-//   const username = document.getElementById('username').value
-//   const password = document.getElementById('password').value
-
-//   if(!user){
-//   console.log("On my homies so yk we hope out")
-// }else{
-//   console.log("DAWG FINALLY")
-// }
-// event.preventDefault();
-// console.log("draken");
-
-// if (user) {
-//     // Save to local storage
-//     localStorage.setItem('currentUser', JSON.stringify(user));
-//     console.log('Login successful! User data saved to local storage.');
-//   } else {
-//     console.log('Login failed! Incorrect username or password.');
-//   }
-
-// })   
-// }
-
-// loginSet(username, password);
-
-// const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-// console.log('Logged in user', currentUser)
-   
+      });
     </script>
 </body>
 </html>
