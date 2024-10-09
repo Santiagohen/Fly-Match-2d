@@ -1,10 +1,10 @@
 [
     {
         "flightId": 1,
-        "origin": "Some City",
-        "destination": "Some Other City",
-        "date": "some date",
-        "time": "00:00",
+        "origin": "Phoenix, Arizona",
+        "destination": "Houston, Texas",
+        "date": "10/24/24",
+        "time": "08:30",
         "passengers": []
     }
 ]
