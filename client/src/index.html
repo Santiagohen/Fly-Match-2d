@@ -4,24 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
+    <link rel="stylesheet" href="/css/landing.css" />
   </head>
   <body>
-    Search For Flights
-    <a href="http://localhost:3000/sign-in">
-      <button id="button-to-sign-in">BOOK NOW</button>
-</a>
-    <script>
-      const buttonToPages = document.getElementById('button-to-sign-in');
-      buttonToPages.addEventListener("click", (e) => {
-        let username = localStorage.getItem('username')
-        if(username){
-          alert('PLEASE')
-          console.log(username)
-        }else {
-    // Do something else if the key does not exist or the value is null
-    console.log("The item does not exist in localStorage.");
-}
-      });
-    </script>
+    <header>
+      <p id="nameNav">Invenire Airlines</p>
+    </header>
+
+      <section id="banner">
+        <div class="bannerContainer">
+          <div id="text">
+            <h2>Search <br><br>For <br><br>Flights</h2>
+            <a href="form.html">
+            <button class="book-now">Cick here</button>
+            </a>
+          </div>
+        <img src="https://calaero.edu/wp-content/uploads/2023/08/iStock-1332501286-scaled.jpg" alt="">
+        </div>
+      </section>
+   
   </body>
 </html>

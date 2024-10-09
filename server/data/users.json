@@ -1,32 +1,26 @@
 [
   {
-    "id": 1,
-    "username": "sherna623",
-    "email": "santiagohgamerpro@gmail.com",
-    "password": "Skibbidy"
+    "userId": 1,
+    "admin": true,
+    "username": "Admin",
+    "email": "defaultadmin@email.com",
+    "password": "$2b$10$JlNyPexkdVIYsHIMRL.XHeRncFy5AdETshnLucUvOpruV/3l0dZ4q",
+    "bookedFlights": []
   },
   {
-    "id": 2,
-    "username": "sigma",
-    "email": "rizzler@gmail,com",
-    "password": "ski"
+    "userId": 2,
+    "admin": false,
+    "username": "default",
+    "email": "default@email.com",
+    "password": "$2b$10$cr6PqSxcXOS2kTBpYqhTjOrNQwXEb67.pXAjPd6xpADnuutLn7L42",
+    "bookedFlights": []
   },
   {
-    "id": 3,
-    "username": "Sherna623",
-    "email": "santiagohes75@gmail.com",
-    "password": "skkibidi"
-  },
-  {
-    "id": 4,
-    "username": "Sherna6232",
-    "email": "santiagohe75@gmail.com",
-    "password": "skkibidi"
-  },
-  {
-    "id": 5,
-    "username": "test-acc",
-    "email": "rafaelje@gmail.com",
-    "password": "sss"
+    "userId": 3,
+    "admin": false,
+    "username": "Myles",
+    "email": "myles@email.com",
+    "password": "$2b$10$GIZQx4GyHDjP.NRDvi3YIeqAj5rNvUWdzIpc/7jUHzk9eootTd.Mi",
+    "bookedFlights": []
   }
 ]
