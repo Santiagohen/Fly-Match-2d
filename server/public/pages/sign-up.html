@@ -4,18 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-  </head>
-  <body>
+
+    <style>
+      #soy-yo{
+        display: none;
+      }
+    </style>
+</head>
+<body>
     <h1>Sign Up</h1>
-    <form method="POST" action="">
-      <label for="create-user-name">New Username:</label>
-      <input
-        type="text"
-        id="create-user-name"
-        name="create-user-name"
-        placeholder="Enter Username"
-        required
-      /><br /><br />
+    <form action="/signed" method="POST" id="sign-in-form" >
 
       <label for="create-email">New Email:</label>
       <input
@@ -25,17 +23,23 @@
         placeholder="Enter Email"
         required
       /><br /><br />
-
       <label for="create-password">New Password:</label>
       <input
         type="password"
         id="create-password"
         name="create-password"
         placeholder="Enter Password"
+        pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$"
+        title="Password must be at least 8 characters long, contain at least one uppercase letter, and one special character."
         required
       /><br /><br />
 
-      <input type="submit" value="Submit" />
+    <label for="password">New Password:</label>
+    <input type="password" id="password" name="password" required /><br /><br />
+
+    <input type="submit" value="Submit" />
+
+    <p id="soy-yo">Hi </p>
     </form>
     <script>
       async function fetchUsers() {
@@ -44,8 +48,10 @@
           if (!response.ok) {
             throw new Error("Error fetching users. Response not ok");
           }
+
           // there could be an error getting response/fetching the endpoint
           console.log(response);
+
           const users = await response.json();
           // there could be an error parsing the response
           // console.log(users);
@@ -55,6 +61,27 @@
           console.error(error);
         }
       }
+      document
+        .getElementById("sign-in-form")
+        .addEventListener("submit", async function (e) {
+          const username = document.getElementById("username").value;
+          const email = document.getElementById("email").value;
+          const response = await fetch("/users");
+
+          const result = await response.json();
+
+        // let user = result.find(u => u.username === username && u.email === email)
+          let user = result.find(u => u.username === username || u.email === email)
+        if(user){
+          document.getElementById('soy-yo').style.display = "block";
+          window.location.href = 'sign-up';
+          alert('user already exists')
+          console.log('hehehehahaha');
+        }
+
+      })
+
+      
     </script>
   </body>
 </html>

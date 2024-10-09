@@ -1,60 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
-  </head>
-  <body>
+    <style>
+      * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        a, button {
+            font-weight: 500;
+            font-size: 16px;
+            color: black;
+            text-decoration: none;
+        }
+        a {
+            font-size: 25px;
+            font-weight: 1000;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            background-color: lightblue;
+        }
+        .logo {
+            width: 50px;
+        }
+        .navLinks {
+            display: inline-block;
+            padding: 0px 20px;
+            word-spacing: 10px;
+            letter-spacing: 5px;
+        }
+        button#signIn {
+            padding: 9px 25px;
+            background-color: rgb(8, 8, 8);
+            border: none;
+            border-radius: 50px;
+            color:white;
+            transition: all 1.2s ease 0s;
+        }
+        button#signIn:hover {
+            /* background-color: rgba(0,136,169,0.8); */
+            background-color: rgb(240, 121, 9, 1);
+            color: black;
+        }
+
+        img#sideImage {
+          width: 30%;
+          height: 200px;
+        }
+    </style>
+</head>
+<body>
+  <header>
+        <img class="logo" src="image/logo.svg" alt="logo">
+
+        <nav>
+            <ul class="navLinks">
+            <a href="index.html">Invenire Airlines</a>
+            </ul>
+        </nav>
+        <a class="login" href="sign-in.html"><button id="signIn">Sign In</button></a>
+    </header>
+
+    
+    <img src="https://s3-us-east-2.amazonaws.com/inboxlab-ghost-blogs/2018/03/Salvador--Bahia--Brazil-streets.jpg" alt="" id="sideImage">
+    
+  <div id="Container">
     <h1>Sign In</h1>
-    <form method="POST" action="">
-      <label for="user-name">User Name:</label>
-      <input
-        type="text"
-        id="user-name"
-        name="user-name"
-        placeholder="Enter Username"
-        required
-      /><br /><br />
+    <form method="POST"  action="/login" id="login-form">
 
-      <label for="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Enter Email"
-        required
-      /><br /><br />
+    <label for="username">User Name: </label>
+    
+    <input type="text" id="username" name="username" required /><br /><br /> 
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required /><br /><br />
+  
 
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Enter Password"
-        required
-      /><br /><br />
+    
 
-      <input type="submit" value="Submit" />
+    <input type="submit" onclick="loginSet()" value="Submit" />
     </form>
+  </div>
     <script>
-      async function fetchUsers() {
+       
+    
+     
+
+              let isLogin = false;
+          async function fetchUsers() {
         try {
+   
           const response = await fetch("/users");
           if (!response.ok) {
             throw new Error("Error fetching users. Response not ok");
           }
+
           // there could be an error getting response/fetching the endpoint
           console.log(response);
           const users = await response.json();
           // there could be an error parsing the response
           // console.log(users);
           return users;
+//           function checkLogin(username, password) {
+//     // Search for a matching user in the userJson array
+//     const user = users.find(user => user.username === username && user.password === password);
+//             if(user){
+//               console.log("hi")
+//             }
+//     // Return true if the user exists, otherwise false
+//     return user ? true : false;
+// }
+
+// // Handle login form submission
+// document.getElementById('login-form').addEventListener('submit', function(event) {
+//     event.preventDefault();
+
+//     const username = document.getElementById('username').value;
+//     const password = document.getElementById('password').value;
+
+//     // Check if the user exists
+//     if (checkLogin(username, password)) {
+//         // Save the user in localStorage if credentials are correct
+//         localStorage.setItem('currentUser', username);
+//         alert('Login successful!');
+//     } else {
+//         alert('Invalid username or password');
+//     }})
+
         } catch (error) {
           console.error("There was a problem");
           console.error(error);
         }
+
       }
+
+
+
+
+// Return true if the user exists, otherwise false
+
+
+document.getElementById('login-form').addEventListener('submit', async function(event) {
+  const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('/users') 
+  
+
+    const result = await response.json();
+  let user = result.find(u => u.username === username && u.password === password)
+    
+  if (user) {
+        // Save username and password to localStorage
+        localStorage.setItem('username', username);
+        // localStorage.setItem('password', password);
+        isLogin = true;
+        console.log(isLogin)
+        alert('success')
+        console.log('hi')
+        
+        window.location.href = '/';  // Redirect to the sign-in page
+    } else {
+        console.log("BRUH PLEASE")  // Display the error message
+        alert('user not found')
+    }
+
+
+})
+//   let user = users.find(user => user.username === username && user.password === password && id === id);
+//   const username = document.getElementById('username').value
+//   const password = document.getElementById('password').value
+
+//   if(!user){
+//   console.log("On my homies so yk we hope out")
+// }else{
+//   console.log("DAWG FINALLY")
+// }
+// event.preventDefault();
+// console.log("draken");
+
+// if (user) {
+//     // Save to local storage
+//     localStorage.setItem('currentUser', JSON.stringify(user));
+//     console.log('Login successful! User data saved to local storage.');
+//   } else {
+//     console.log('Login failed! Incorrect username or password.');
+//   }
+
+// })   
+// }
+
+// loginSet(username, password);
+
+// const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+// console.log('Logged in user', currentUser)
+   
     </script>
-  </body>
+</body>
 </html>

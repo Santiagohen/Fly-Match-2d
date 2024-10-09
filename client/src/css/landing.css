@@ -92,7 +92,7 @@ h2#textFlights {
 }
 button.book-now {
     border-radius: 50px;
-    background-color: orange;
+    background-color: rgb(240,121,9,.9);
     color: black;
     width: 250px;
     height: 50px;
