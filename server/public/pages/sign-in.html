@@ -7,34 +7,43 @@
 </head>
 <body>
     <h1>Sign In</h1>
-    <form method="POST" action="">
-
-    <label for="user-name">User Name:</label>
-    <input type="text" id="user-name" name="user-name" required /><br /><br />
+    <form id="login-form">
+    <label for="username">User Name:</label>
+    <input type="text" id="username" name="username" required /><br /><br />
 
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" required /><br /><br />
 
-    <input type="submit" value="Submit" />
+    <input type="submit"/>
     </form>
     <script>
-              async function fetchUsers() {
+      document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
         try {
-          const response = await fetch("/users");
-          if (!response.ok) {
-            throw new Error("Error fetching users. Response not ok");
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+
+          const response = await fetch('/login', {
+            method: "POST",
+            "headers": {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password })
+          });
+
+          const data = await response.json();
+        
+          if (data) {
+            localStorage.setItem("activeUser", JSON.stringify(data, null, 2));
+            window.location = "/"
+          } else {
+            
           }
-          // there could be an error getting response/fetching the endpoint
-          console.log(response);
-          const users = await response.json();
-          // there could be an error parsing the response
-          // console.log(users);
-          return users;
         } catch (error) {
-          console.error("There was a problem");
-          console.error(error);
+          console.error(error.message);
         }
-      }
+      });
     </script>
 </body>
 </html>
