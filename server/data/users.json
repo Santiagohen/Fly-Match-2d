@@ -22,5 +22,13 @@
     "email": "myles@email.com",
     "password": "$2b$10$GIZQx4GyHDjP.NRDvi3YIeqAj5rNvUWdzIpc/7jUHzk9eootTd.Mi",
     "bookedFlights": []
+  },
+  {
+    "userId": 4,
+    "admin": false,
+    "username": "Myles2",
+    "email": "myles2@email.com",
+    "password": "$2b$10$8PMlO9GVVtOBUuE6tvb.1uJ3noZFoY54kWzL8I09WGNXUU3ATxyCe",
+    "bookedFlights": [1, 2, 3]
   }
 ]
