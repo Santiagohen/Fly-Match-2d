@@ -1,6 +1,6 @@
 [
   {
-    "flightId": 1,
+    "flightsId": 1,
     "origin": "Some City",
     "destination": "Some Other City",
     "date": "some date",
@@ -8,7 +8,7 @@
     "passengers": []
   },
     {
-    "flightId": 2,
+    "flightsId": 2,
     "origin": "Some City",
     "destination": "Some Other City",
     "date": "some date",

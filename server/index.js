@@ -160,23 +160,54 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/addFlight',async  (req, res) => {
-    const { userId, flightId } = req.body;
-    let users = []
-    let flights = [];
-    let flightsData = await fs.readFile(flightDataPath, 'utf8')
-    const userData = await fs.readFile(dataPath, 'utf8');
-    flights = JSON.parse(flightsData)
-    users = JSON.parse(userData);   
-    const user = users.find(u => u.userId === userId);
-    if (!user) {
-        return res.status(400).json({ message: 'User not found' });
-    }
+// const saveUsers = (updatedUsers) => {
+//     fs.writeFileSync(dataPath, JSON.stringify(updatedUsers, null, 2));
+// };
 
-    const flight = flights.find(f => f.flightId === flightId);
-    
+app.post('/add-flight', async (req, res) => {
+    try {
+        const { userId, flightId } = req.body;
+        let users = [];
 
+        try {
+            const data = await fs.readFile(dataPath, 'utf8')
+            users = JSON.parse(data);    
+        } catch (error) {
+            
+        }
+
+        let user = users.find(u => u.userId === userId)
+
+        if (user) {
+            console.log(userId);
+        }
+    }catch(error){}
 })
+
+// app.post('/addFlight',async  (req, res) => {
+//     const { userId, flightId } = req.body;
+//     let users = []
+//     let flights = [];
+//     let flightsData = await fs.readFile(flightDataPath, 'utf8')
+//     const userData = await fs.readFile(dataPath, 'utf8');
+//     flights = JSON.parse(flightsData)
+//     users = JSON.parse(userData);   
+//     const user = users.find(u => u.userId === userId);
+//     if (!user) {
+//         return res.status(400).json({ message: 'User not found' });
+//     }
+
+//     const flight = flights.find(f => f.flightId === flightId);
+//     if (!flight) {
+//         return res.status(404).json({ message: "Flight not found" });
+//     }
+//     if (!user.flightsId.includes(flightId)) {
+//         user.flightsId.push(flightId)
+//     }
+
+//     saveUsers(users)
+
+// })
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

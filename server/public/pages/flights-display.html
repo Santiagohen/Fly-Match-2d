@@ -56,13 +56,38 @@
           const flights = await fetchFlights();
           if (Array.isArray(flights) && flights.length > 0) {
             flights.forEach((flight) => {
-              const row = `<tr><td>${flight.origin}</td><td>${flight.destination}</td><td>${flight.date}</td><td>${flight.time}</td><td><button class="hi">BOOK</button></td></tr>`;
+              const row = `<tr><td>${flight.origin}</td><td>${flight.destination}</td><td>${flight.date}</td><td>${flight.time}</td><td><button onClick="addFlights()" id="book-flight-button">BOOK</button></td></tr>`;
               tableBody.innerHTML += row;
             });
           }
         } catch (error) {}
       }
       document.addEventListener("DOMContentLoaded", renderFlights);
+
+
+    async function addFlights(){
+      const userId = 1;
+      const flightId = 1;
+    
+      
+
+
+     const answer = await fetch('/add-Flight', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId, flightId })
+        
+    })
+    const data = await answer.json()
+    console.log(data);
+    }
+      // const bookFlightButton = document.getElementById('book-flight-button')
+
+      // bookFlightButton.addEventListener('click', function(e){
+      //   alert('test')
+      // })
     </script>
   </body>
 </html>
