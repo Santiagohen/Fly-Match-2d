@@ -33,4 +33,12 @@
 # What is one real world reference web site that you have used to inspire your work on this project? What is it about that site that appeals to you?
 > Priceline, they have some really nice features and an overall good design
 # Have you considered hwo users with sight disabilities might view your site? Have you taken into account color blindness or poor vision? Do you need to reexamine or recalibrate your sites font sizes or color?
-> Our site isn't really dependent on color, a person with some kind of color blindness should be able to work the site with no real problem. 
+> Our site isn't really dependent on color, a person with some kind of color blindness should be able to work the site with no real problem.
+
+## 10-9
+# Describe a situation where you collaborted with a team member
+> When we started to work on the flights display section. Santi and myselft discussed how we wanted the backend functions to work and what kind of data should be displayed
+# How did these meetings influnce your teams workflow and process?
+> We made sure everyone knew where and what files we were currently workiing on. These meetings made it clear that in order for our project to be successful we must have efficient and clear communication. Everyone knew there role and what they needed to work on at any given time.
+# What were the key design decisions made it the project, and what was your role in them?
+> Our color scheme being lightblue and orange, lightblue is our main color while organe is our highlight that pops throughout our websites.
