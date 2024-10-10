@@ -4,47 +4,366 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
+    <style>
+      * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        a, button {
+            font-weight: 500;
+            font-size: 16px;
+            color: black;
+            text-decoration: none;
+        }
+        a {
+            font-size: 25px;
+            font-weight: 1000;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            background-color: lightblue;
+        }
+        .logo {
+            width: 50px;
+        }
+        .navLinks {
+            display: inline-block;
+            padding: 0px 20px;
+            word-spacing: 10px;
+            letter-spacing: 5px;
+        }
+        button#signIn {
+            padding: 9px 25px;
+            background-color: rgb(8, 8, 8);
+            border: none;
+            border-radius: 50px;
+            color:white;
+            transition: all 1.2s ease 0s;
+        }
+        button#signIn:hover {
+            /* background-color: rgba(0,136,169,0.8); */
+            background-color: rgb(240, 121, 9, 1);
+            color: black;
+        }
+
+       
+        svg {
+	position: fixed;
+	height: 100%;
+	z-index: -1;
+    margin-top: 150px;
+}
+
+div#Container{
+    width: 100vw;
+    height: 100vh;
+    margin-left: 35%;
+    margin-top: 50px;
+}
+
+.login-content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+
+form{
+	width: 360px;
+}
+
+.login-content img{
+    height: 100px;
+}
+
+.login-content h2{
+	margin: 15px 0;
+	color: black;
+	font-size: 2.9rem;
+}
+
+.login-content .input-div{
+	position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.login-content .input-div.one{
+	margin-top: 0;
+}
+
+.i{
+	color: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.i i{
+	transition: .3s;
+}
+
+.input-div > div{
+    position: relative;
+	height: 45px;
+}
+
+.input-div > div > h5{
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999;
+	font-size: 18px;
+	transition: .3s;
+}
+
+.input-div:before, .input-div:after{
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background-color: orange;
+	transition: .4s;
+}
+
+.input-div:before{
+	right: 50%;
+}
+
+.input-div:after{
+	left: 50%;
+}
+
+.input-div.focus:before, .input-div.focus:after{
+	width: 50%;
+}
+
+.input-div.focus > div > h5{
+	top: -5px;
+	font-size: 15px;
+}
+
+.input-div.focus > .i > i{
+	color: orange;
+}
+
+.input-div > div > input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background: none;
+	padding: 0.5rem 0.7rem;
+	font-size: 1.2rem;
+	color: black;
+}
+
+.input-div.pass{
+	margin-bottom: 4px;
+}
+
+a.account{
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: black;
+	font-size: 0.9rem;
+	transition: .3s;
+}
+
+a.account:hover{
+	color: orange;
+}
+
+.btn{
+	display: block;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: 2px solid black;
+	background-color: orange;
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: black;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+.btn:hover{
+	border: 4px solid black;
+}
+
+
+/* @media screen and (max-width: 1050px){
+	.Container{
+		grid-gap: 5rem;
+	}
+} */
+
+@media screen and (max-width: 1000px){
+	form{
+		width: 290px;
+	}
+
+	.login-content h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+    svg {
+        display: none;
+    }
+
+}
+    </style>
 </head>
 <body>
-    <h1>Sign In</h1>
-    <form id="login-form">
-      <label for="username">User Name: </label>
-      <input type="text" id="username" name="username" required /><br /><br /> 
+  <header>
+    <img class="logo" src="image/logo.svg" alt="logo">
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required /><br /><br />
-    
-      <input type="submit"/>
-    </form>
+    <nav>
+        <ul class="navLinks">
+        <a href="index.html">Invenire Airlines</a>
+        </ul>
+    </nav>
+    <a class="login" href="sign-in.html"><button id="signIn">Sign In</button></a>
+</header>
+
+<svg width="100%" height="100%" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:lightblue;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#grad1)" d="M0,128L30,144C60,160,120,192,180,197.3C240,203,300,181,360,154.7C420,128,480,96,540,101.3C600,107,660,149,720,170.7C780,192,840,192,900,160C960,128,1020,64,1080,48C1140,32,1200,64,1260,85.3C1320,107,1380,117,1410,122.7L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320H0V128Z"/>
+</svg>
+
+<div id="Container">
+  <div class="login-content">
+  <form id="login-form">
+      <h2 class="title">Sign In</h2>
+      <div class="input-div one">
+          <div class="i">
+              <i class="fas fa-user"></i>
+          </div>
+          <div class="div">
+              <h5>Username</h5>
+              <!-- <label for="username">User Name: </label> -->
+              <input type="text" id="username" name="username" class="input" required />
+          </div>
+      </div>
+      <div class="input-div pass">
+          <div class="i">
+              <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+              <h5>Password</h5>
+              <!-- <label for="password">Password:</label> -->
+              <input type="password" id="password" name="password" class="input" required />
+          </div>
+      </div>
+      <a href="/sign-up" class="account">Don't have an account: SIGN UP</a>
+  <input type="submit" class="btn" />
+  </form>
+</div>
+</div>
 
     <script> 
       document.getElementById('login-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
+  e.preventDefault();
+  let isLogin = false; // Change 'const' to 'let' to modify it later
+  try {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-        try {
-          const username = document.getElementById('username').value;
-          const password = document.getElementById('password').value;
+    const response = await fetch('/login', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password })
+    });
 
-          const response = await fetch('/login', {
-            method: "POST",
-            "headers": {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password })
-          });
+    if (!response.ok) {
+      alert("Invalid username or password.");
+      return; // Exit the function if the login failed
+    }
 
-          const data = await response.json();
-        
-          if (data) {
-            localStorage.setItem("activeUser", JSON.stringify(data, null, 2));
-            window.location = "/"
-          } else {
-            
-          }
-        } catch (error) {
-          console.error(error.message);
-        }
-      });
+    const data = await response.json();
+    
+    if (data) {
+      localStorage.setItem("activeUser", JSON.stringify(data, null, 2));
+      window.location = "/";
+      isLogin = true;
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// Example function to book a flight
+async function bookFlight(flightId) {
+  const activeUser = JSON.parse(localStorage.getItem("activeUser"));
+  const username = activeUser.username; // Get the username from activeUser
+
+  try {
+    const response = await fetch('/update-flight', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ flightId, username }) // Include username in the request body
+    });
+
+    if (!response.ok) {
+      console.error("Failed to update flight.");
+    } else {
+      console.log("Flight updated successfully.");
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+      const inputs = document.querySelectorAll(".input");
+
+
+function addcl(){
+	let parent = this.parentNode.parentNode;
+	parent.classList.add("focus");
+}
+
+function remcl(){
+	let parent = this.parentNode.parentNode;
+	if(this.value == ""){
+		parent.classList.remove("focus");
+	}
+}
+
+
+inputs.forEach(input => {
+	input.addEventListener("focus", addcl);
+	input.addEventListener("blur", remcl);
+});
     </script>
 </body>
 </html>

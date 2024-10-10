@@ -1,48 +1,25 @@
 [
   {
     "userId": 1,
-    "admin": true,
-    "username": "Admin",
-    "email": "defaultadmin@email.com",
-    "password": "$2b$10$JlNyPexkdVIYsHIMRL.XHeRncFy5AdETshnLucUvOpruV/3l0dZ4q",
+    "admin": false,
+    "username": "santiago",
+    "email": "santiagohe7225@gmail.com",
+    "password": "$2b$10$GQ/2Kq/OqOhnthYGKAJBYOMFZSUUopbJbloXGQWA4Pln3bwGDiEx.",
     "bookedFlights": [
+      "1",
       "2",
       "3",
       "3",
       "2",
-      "1"
+      "1",
+      "1",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "1",
+      "2"
     ]
-  },
-  {
-    "userId": 2,
-    "admin": false,
-    "username": "default",
-    "email": "default@email.com",
-    "password": "$2b$10$cr6PqSxcXOS2kTBpYqhTjOrNQwXEb67.pXAjPd6xpADnuutLn7L42",
-    "bookedFlights": []
-  },
-  {
-    "userId": 3,
-    "admin": false,
-    "username": "Myles",
-    "email": "myles@email.com",
-    "password": "$2b$10$GIZQx4GyHDjP.NRDvi3YIeqAj5rNvUWdzIpc/7jUHzk9eootTd.Mi",
-    "bookedFlights": []
-  },
-  {
-    "userId": 4,
-    "admin": false,
-    "username": "Myles2",
-    "email": "myles2@email.com",
-    "password": "$2b$10$8PMlO9GVVtOBUuE6tvb.1uJ3noZFoY54kWzL8I09WGNXUU3ATxyCe",
-    "bookedFlights": []
-  },
-  {
-    "userId": 5,
-    "admin": false,
-    "username": "test-acc",
-    "email": "santiagohe75@gmail.com",
-    "password": "$2b$10$TpLJhPVkbVwIUxUO6oUVqOVvjDUrML98rO3lnvTDmVlpHJ6j/UWB2",
-    "bookedFlights": []
   }
 ]

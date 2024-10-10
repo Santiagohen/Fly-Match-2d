@@ -95,7 +95,9 @@ app.post('/signed', async (req, res) => {
         users.push(user);
 
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
+        res.redirect('sign-in')
         return res.status(200).send();
+
     } catch (error) {
         console.error('error processing form:', error)
     }
@@ -141,7 +143,7 @@ app.post('/login', async (req, res) => {
 
         const data = await fs.readFile(dataPath, 'utf8');
         users = JSON.parse(data);
-        
+
         let user = users.find(u => u.username === username);
 
         if (user) {
@@ -155,19 +157,21 @@ app.post('/login', async (req, res) => {
 
                 // delete data the client should not store
                 delete user.password;
-                delete user.userId;
 
                 // send user object to client for storing in localstorage
-                res.status(200).send(user);
+                return res.status(200).send(user);
+            } else {
+                return res.status(404).send();
             }
         } else {
-            res.status(400);
-            res.redirect('sign-in')
+            res.status(404).send();
         }
 
+    } catch (error) {
+        console.error(error.message)
     }
-    catch (error) { }
-})
+});
+
 app.put('/update-flight/:currentId', async (req, res) => {
     try {
         const { currentId } = req.params;

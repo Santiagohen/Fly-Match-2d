@@ -60,7 +60,9 @@ async function updateUserBookedFlights(flightId) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ flightId }), // Send the flightId in the request body
-    });
+    }
+    )
+    
 
     if (!response.ok) {
       throw new Error("Error updating user. Response not ok");
@@ -68,10 +70,13 @@ async function updateUserBookedFlights(flightId) {
 
     const updatedUser = await response.json();
     console.log("User updated:", updatedUser);
-  } catch (error) {
+  }
+   catch (error) {
     console.error("Error updating booked flights:", error);
   }
+
 }
+
 
 async function renderFlights() {
   const tableBody = document.getElementById("flightTableBody");

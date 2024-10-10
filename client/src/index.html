@@ -5,23 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link rel="stylesheet" href="/css/landing.css" />
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   </head>
   <body>
     <header>
-      <p id="nameNav">Invenire Airlines</p>
+        <img class="logo" src="image/logo.svg" alt="logo">
+
+        <nav>
+            <ul class="navLinks">
+            <a href="index.html">Invenire Airlines</a>
+            </ul>
+        </nav>
+        <a class="login" href="/sign-in"><button id="signIn">Sign In</button></a>
     </header>
 
       <section id="banner">
         <div class="bannerContainer">
           <div id="text">
-            <h2>Search <br><br>For <br><br>Flights</h2>
-            <a href="form.html">
-            <button class="book-now">Cick here</button>
+            <h2>Search for</h2> <br><h2 id="textFlights">flights</h2> <br><h2>all across </h2><h2 id="latin">Latin America</h2>
+            <a  id="book-now-link" href="/flights-display">
+            <button id="book-now" class="book-now">Search</button>
             </a>
           </div>
-        <img src="https://calaero.edu/wp-content/uploads/2023/08/iStock-1332501286-scaled.jpg" alt="">
+        <img src="https://calaero.edu/wp-content/uploads/2023/08/iStock-1332501286-scaled.jpg" alt="" id="plane">
         </div>
       </section>
    
+      
+        <h1 id="popular">Popular Destinations</h1>
+        <div class="wrapper">
+        <button class="arrow prev"><i class="ri-arrow-left-s-line"></i></button>
+        <button class="arrow next"><i class="ri-arrow-right-s-line"></i></button>
+        <div class="card-wrapper">
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/Santuario-de-las-Lajas-1440x1080.jpg" alt="Colombia">
+                <div class="card-info">
+                    <a href="#" class="card-title">Santuario de las Lajas, Colombia</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/Untitled-design-34.jpg" alt="Argentina">
+                <div class="card-info">
+                    <a href="#" class="card-title">Mount Fitz Roy, Argentina</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2015/05/P1010579.jpg" alt="Peru">
+                <div class="card-info">
+                    <a href="#" class="card-title">Machu Picchu, Peru</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2021/10/agustin-diaz-gargiulo-GTLJklnjn-E-unsplash-1440x1920.jpg" alt="Brazil">
+                <div class="card-info">
+                    <a href="#" class="card-title">Rio de Janeiro, Brazil</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/Screen-Shot-2014-09-11-at-6.08.46-am.png" alt="Chile">
+                <div class="card-info">
+                    <a href="#" class="card-title">Atacama Desert, Chile</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2015/05/P1010626.jpg" alt="Peru">
+                <div class="card-info">
+                    <a href="#" class="card-title">Cusco, Peru</a>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+
+      <section id="tips">
+        <h1 id="tipsHeader">Tips On Booking Cheap Flights</h1>
+        <div id="open">
+        <p>Looking for the best time to buy airline tickets to get a cheap flight to everywhere? We’ve got you covered anytime, anywhere. Here’s how to find the best deal for flight booking no matter where you want to go in the world.</p>
+</div>
+        <br>
+        <div id="day-of-week">
+        <h4>Which day of the week is the best day to buy cheap airline tickets?</h4>
+        <p>For both U.S. domestic and international travel, Sundays can be cheaper for airline ticket purchases. Fridays tend to be the most expensive day to book a flight. Booking on the right day of the week could save you up to 6% on your airfare, according to historical data*.</p>
+        </div>
+<br>
+        <div id="cheap-days">
+            <h4>Which are the cheapest days to fly?</h4>
+            <p>Analysis of domestic and international airfare prices shows that flying out on Fridays can be cheaper. Many travelers start their trips on Sundays, so your chances of a lower price are better when departing early in the week instead. Starting your trip on a Friday could be almost 11% cheaper than air travel on Sundays, so book flights online wisely*!</p>
+        </div>
+        <br>
+        <div id="last-minute">
+            <h4>Is it cheaper to buy flights last minute?</h4>
+            <p>Flight tickets can be cheaper at the last minute depending on how late you’re actually booking, where you’re going, and the kind of flight you opt for. For domestic flights with Economy tickets, prices usually start to increase 3 weeks before departure, and 4 weeks for international flights, according to historical data*.</p>
+        </div>
+        <br>
+        <div id="look-out">
+            <h4>What should I look out for when booking flights?</h4>
+            <p>Several factors go into any flight booking, and you’ll need to keep an eye out for them all to ensure that you get the travel time, luggage policy, airline, and class you want. Consider which airport is closest to your ultimate destination (travelers to Los Angeles may prefer flights to LAX over flights to PSP), and make sure that the flight will accommodate all the luggage you plan on bringing. Additionally, consider the different flight classes including economy flights for functionality and premium flights if you want to enjoy a more relaxing experience.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="/admin">Admin Page</a></li>
+
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#">All Accommodation Types</a></li>
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Car Rentals</a></li>
+                        <li><a href="#">Vacation packages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">Get Help</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      
+        const cardWrapper = document.querySelector('.card-wrapper')
+const widthToScroll = cardWrapper.children[0].offsetWidth
+const arrowPrev = document.querySelector('.arrow.prev')
+const arrowNext = document.querySelector('.arrow.next')
+const cardBounding = cardWrapper.getBoundingClientRect()
+const cardImageAndLink = cardWrapper.querySelectorAll('img, a')
+let currScroll = 0
+let initPos = 0
+let clicked = false
+
+cardImageAndLink.forEach(item=> {
+  item.setAttribute('draggable', false)
+})
+
+arrowPrev.onclick = function() {
+  cardWrapper.scrollLeft -= widthToScroll
+}
+
+arrowNext.onclick = function() {
+  cardWrapper.scrollLeft += widthToScroll
+}
+
+cardWrapper.onmousedown = function(e) {
+  cardWrapper.classList.add('grab')
+  initPos = e.clientX - cardBounding.left
+  currScroll = cardWrapper.scrollLeft
+  clicked = true
+}
+
+cardWrapper.onmousemove = function(e) {
+  if(clicked) {
+    const xPos = e.clientX - cardBounding.left
+    cardWrapper.scrollLeft = currScroll + -(xPos - initPos)
+  }
+}
+
+cardWrapper.onmouseup = mouseUpAndLeave
+cardWrapper.onmouseleave = mouseUpAndLeave
+
+function mouseUpAndLeave() {
+  cardWrapper.classList.remove('grab')
+  clicked = false
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const isLoggedIn = localStorage.getItem("activeUser");
+  const signInButton = document.getElementById('signIn');
+const bookLink = document.getElementById('book-now-link');
+const bookButton = document.getElementById('book-now')
+
+  if (isLoggedIn) {
+    // User is logged in
+    console.log("User is logged in");
+    
+    signInButton.style.display = "none"
+  } else {
+    // User is not logged in
+bookLink.href="sign-in"
+    console.log("User is not logged in");
+  }
+});
+
+
+    </script>
   </body>
 </html>
