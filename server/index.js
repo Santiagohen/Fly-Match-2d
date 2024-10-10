@@ -35,7 +35,7 @@ app.get('/admin', (req, res) => {
     res.sendFile('pages/admin.html', { root: serverPublic })
 })
 
-app.get('/flights', async (req, res) => {
+app.get('/flights/:flightsId', async (req, res) => {
     try {
         const data = await fs.readFile(flightDataPath, 'utf8');
 
@@ -151,7 +151,7 @@ app.post('/login', async (req, res) => {
 
 app.post('/add-flight', async (req, res) => {
     try {
-        const { userId, flightId } = req.body;
+        const { username, flightId } = req.body;
         let users = [];
 
         try {

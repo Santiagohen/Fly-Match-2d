@@ -37,7 +37,35 @@
     <script>
       async function fetchFlights() {
         try {
-          const response = await fetch("/flights");
+
+          const response = await fetch(
+          `/flights/${flightsId}`,
+          {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          // body: JSON.stringify({
+          // flightsId
+          // })
+
+          }
+          )
+
+          const data = await response.json();
+          console.log(data)
+        
+        //   const response = await fetch(`/flights/${flightsId}`,
+        //  {
+        //   method: "POST"
+        //   headers{
+        //     "Content-Type": "application/json"
+        //   },
+        
+        //  }
+        // )
+         
+         
           if (!response.ok) {
             throw new Error("Error fetching flights. Response not ok");
           }
@@ -65,24 +93,24 @@
       document.addEventListener("DOMContentLoaded", renderFlights);
 
 
-    async function addFlights(){
-      const userId = 1;
-      const flightId = 1;
+    // async function addFlights(){
+    //   const userId = 1;
+    //   const flightId = 1;
     
       
 
 
-     const answer = await fetch('/add-Flight', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ userId, flightId })
+    //  const answer = await fetch('/add-Flight', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ userId, flightId })
         
-    })
-    const data = await answer.json()
-    console.log(data);
-    }
+    // })
+    // const data = await answer.json()
+    // console.log(data);
+    // }
       // const bookFlightButton = document.getElementById('book-flight-button')
 
       // bookFlightButton.addEventListener('click', function(e){
