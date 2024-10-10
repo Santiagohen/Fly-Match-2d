@@ -40,19 +40,6 @@ app.get('/users', async (req, res) => {
     }
 });
 
-// don't need this whole thing
-// let users = require(dataPath);
-
-// function getNextUserId() {
-//     if (users.length === 0) {
-//         return 1;  // First user gets ID 1
-//     }
-    
-//     // Find the highest current user ID
-//     const lastUserId = users[users.length - 1].id;
-//     return lastUserId + 1;
-// }
-
 app.get('/sign-up', (req, res) => {
     res.sendFile('pages/sign-up.html', { root: serverPublic })
 })
@@ -65,17 +52,15 @@ app.post('/signed', async (req, res) => {
         try {
             const data = await fs.readFile(dataPath, 'utf8');
             users = JSON.parse(data);
-
-            const user = users.some(user => user.email === email || user.username === username);
-           
-            if (user) {
-                console.log("Existing username or email, retry");
-                res.redirect('sign-up');
-                return res.status(400);
-            }
         } catch (error) {
             console.error('Error reading user data:', error)
             users = []
+        }
+
+        let user = users.find(u => u.email === email || u.username === username);
+
+        if (user) {
+            return res.status(409).send();
         }
 
         const hashedPassword = await bcrypt.hash(password, 10).then(hash => {
@@ -88,7 +73,7 @@ app.post('/signed', async (req, res) => {
         users.push(user);
 
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
-        res.redirect('sign-up');
+        return res.status(200).send();
     } catch (error) {
         console.error('error processing form:', error)
     }
@@ -110,7 +95,7 @@ app.post('/login', async (req, res) => {
         let user = users.find(u => u.username === username);
 
         if (user) {
-            // compare submitted password to stored hashed password
+            // compare submitted password to stored hashed password, uses bcrypt built in function (I have no idea how it works)
             const validatedLogin = await bcrypt.compare(password, user.password).then(res => {
                 return res;
             }).catch(error => console.error(error.message));

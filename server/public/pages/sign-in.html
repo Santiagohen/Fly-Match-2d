@@ -14,7 +14,7 @@
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required /><br /><br />
     
-      <input type="submit" />
+      <input type="submit"/>
     </form>
 
     <script> 
@@ -36,7 +36,7 @@
           const data = await response.json();
         
           if (data) {
-            localStorage.setItem("activeUser", {data});
+            localStorage.setItem("activeUser", JSON.stringify(data, null, 2));
             window.location = "/"
           } else {
             
