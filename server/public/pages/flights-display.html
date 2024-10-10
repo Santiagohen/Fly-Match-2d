@@ -35,87 +35,86 @@
       </tbody>
     </table>
     <script>
-      async function fetchFlights() {
-        try {
-
-          const response = await fetch(
-          `/flights/${flightsId}`,
-          {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          // body: JSON.stringify({
-          // flightsId
-          // })
-
-          }
-          )
-
-          const data = await response.json();
-          console.log(data)
-        
-        //   const response = await fetch(`/flights/${flightsId}`,
-        //  {
-        //   method: "POST"
-        //   headers{
-        //     "Content-Type": "application/json"
-        //   },
-        
-        //  }
-        // )
-         
-         
-          if (!response.ok) {
-            throw new Error("Error fetching flights. Response not ok");
-          }
-          console.log(response);
-          const flights = await response.json();
-          return flights;
-        } catch (error) {
-          console.error("There was a problem");
-          console.error(error);
-        }
-      }
-      async function renderFlights() {
-        const tableBody = document.getElementById("flightTableBody");
-        tableBody.innerHTML = "";
-        try {
-          const flights = await fetchFlights();
-          if (Array.isArray(flights) && flights.length > 0) {
-            flights.forEach((flight) => {
-              const row = `<tr><td>${flight.origin}</td><td>${flight.destination}</td><td>${flight.date}</td><td>${flight.time}</td><td><button onClick="addFlights()" id="book-flight-button">BOOK</button></td></tr>`;
-              tableBody.innerHTML += row;
-            });
-          }
-        } catch (error) {}
-      }
-      document.addEventListener("DOMContentLoaded", renderFlights);
-
-
-    // async function addFlights(){
-    //   const userId = 1;
-    //   const flightId = 1;
     
+
+
+    async function fetchFlights() {
+  try {
+    const response = await fetch("/flights");
+    if (!response.ok) {
+      throw new Error("Error fetching flights. Response not ok");
+    }
+    const flights = await response.json();
+    return flights;
+  } catch (error) {
+    console.error("There was a problem");
+    console.error(error);
+  }
+}
+
+async function updateUserBookedFlights(flightId) {
+  try {
+    const response = await fetch("/update-flight", {
+      method: "POST", // Assuming a POST request to update the user
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ flightId }), // Send the flightId in the request body
+    });
+
+    if (!response.ok) {
+      throw new Error("Error updating user. Response not ok");
+    }
+
+    const updatedUser = await response.json();
+    console.log("User updated:", updatedUser);
+  } catch (error) {
+    console.error("Error updating booked flights:", error);
+  }
+}
+
+async function renderFlights() {
+  const tableBody = document.getElementById("flightTableBody");
+  tableBody.innerHTML = "";
+
+  try {
+    const flights = await fetchFlights();
+    if (Array.isArray(flights) && flights.length > 0) {
+      flights.forEach((flight) => {
+        const row = `<tr>
+            <td>${flight.origin}</td>
+            <td>${flight.destination}</td>
+            <td>${flight.date}</td>
+            <td>${flight.time}</td>
+            <td><button class="book-button" id="book-${flight.flightsId}">BOOK</button></td>
+          </tr>`;
+        tableBody.innerHTML += row;
+      });
+
+      // Add event listeners to each book button
+      document.querySelectorAll(".book-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          const flightId = this.id.replace("book-", ""); // Extract flightId from the button id
+          updateUserBookedFlights(flightId); // Call the function to update the user's booked flights
+        });
+      });
+    }
+  } catch (error) {
+    console.error("Error rendering flights:", error);
+  }
+}
+
+// Call renderFlights to display the flights on page load or whenever needed
+
+      
+      document.addEventListener("DOMContentLoaded", renderFlights);
+     
+      
+      // Select all elements with the class 'myButton'
       
 
-
-    //  const answer = await fetch('/add-Flight', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ userId, flightId })
-        
-    // })
-    // const data = await answer.json()
-    // console.log(data);
-    // }
-      // const bookFlightButton = document.getElementById('book-flight-button')
-
-      // bookFlightButton.addEventListener('click', function(e){
-      //   alert('test')
-      // })
-    </script>
+      // Loop through each button and add the async event listener
+      
+      </script>
   </body>
 </html>

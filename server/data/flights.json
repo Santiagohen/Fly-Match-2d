@@ -14,5 +14,12 @@
     "date": "some date",
     "time": "00:00",
     "passengers": []
+  },
+  {
+    "flightsId": 3,
+    "origin": "Florida",
+    "destination": "Detroit",
+    "date": "11/11",
+    "time": "5:13"
   }
 ]

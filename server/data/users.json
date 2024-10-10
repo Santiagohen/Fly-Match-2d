@@ -5,7 +5,13 @@
     "username": "Admin",
     "email": "defaultadmin@email.com",
     "password": "$2b$10$JlNyPexkdVIYsHIMRL.XHeRncFy5AdETshnLucUvOpruV/3l0dZ4q",
-    "bookedFlights": []
+    "bookedFlights": [
+      "2",
+      "3",
+      "3",
+      "2",
+      "1"
+    ]
   },
   {
     "userId": 2,
@@ -29,11 +35,7 @@
     "username": "Myles2",
     "email": "myles2@email.com",
     "password": "$2b$10$8PMlO9GVVtOBUuE6tvb.1uJ3noZFoY54kWzL8I09WGNXUU3ATxyCe",
-    "bookedFlights": [
-      1,
-      2,
-      3
-    ]
+    "bookedFlights": []
   },
   {
     "userId": 5,

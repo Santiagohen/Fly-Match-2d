@@ -35,20 +35,17 @@ app.get('/admin', (req, res) => {
     res.sendFile('pages/admin.html', { root: serverPublic })
 })
 
-app.get('/flights/:flightsId', async (req, res) => {
+app.get('/flights', async (req, res) => {
     try {
         const data = await fs.readFile(flightDataPath, 'utf8');
-
         const flights = JSON.parse(data);
-        if (!flights) {
-            throw new Error("Error no flights available");
-        }
         res.status(200).json(flights);
     } catch (error) {
-        console.error("Problem getting flights" + error.message);
+        console.error("Problem getting flights: " + error.message);
         res.status(500).json({ error: "Problem reading flights" });
     }
 });
+
 
 app.get('/users', async (req, res) => {
     try {
@@ -102,6 +99,34 @@ app.post('/signed', async (req, res) => {
     } catch (error) {
         console.error('error processing form:', error)
     }
+})
+app.post('/create-flight', async (req, res) => {
+    try {
+        const { origin, destination, date, time } = req.body;
+        let flights = [];
+
+        try {
+            const data = await fs.readFile(flightDataPath, 'utf8');
+            flights = JSON.parse(data); // Use 'flights' instead of 'users'
+        } catch (error) {
+            console.error('Error reading flight data:', error);
+            flights = []; // Initialize as empty if there's an error
+        }
+
+        const flightId = flights.length > 0 ? flights[flights.length - 1].flightId + 1 : 1; // Correct ID assignment
+
+        const flight = { flightId, origin, destination, date, time };
+
+        flights.push(flight); // Use 'flights' here
+        console.log(flights);
+
+        await fs.writeFile(flightDataPath, JSON.stringify(flights, null, 2)); // Write to the correct file
+        console.log("Flight created successfully:", flight);
+        res.status(201).json({ message: "Flight created successfully", flight });
+    } catch (error) {
+        console.error('Error processing flight creation:', error);
+        res.status(500).json({ error: "Failed to create flight" });
+    }
 });
 
 app.get('/sign-in', (req, res) => {
@@ -139,35 +164,119 @@ app.post('/login', async (req, res) => {
             res.status(400);
             res.redirect('sign-in')
         }
-    
+
+    }
+    catch (error) { }
+})
+app.put('/update-flight/:currentId', async (req, res) => {
+    try {
+        const { currentId } = req.params;
+        const { newOrigin, newDestination, newDate, newTime } = req.body;
+
+        const data = await fs.readFile(flightDataPath, 'utf8');
+        const flights = JSON.parse(data);
+
+        const flightIndex = flights.findIndex(flight =>
+            flight.flightId === parseInt(currentId)
+        );
+
+        if (flightIndex === -1) {
+            return res.status(404).json({ flightInfo: "Flight not found" });
+        }
+
+        flights[flightIndex] = {
+            ...flights[flightIndex],
+            origin: newOrigin,
+            destination: newDestination,
+            date: newDate,
+            time: newTime
+        };
+
+        await fs.writeFile(flightDataPath, JSON.stringify(flights, null, 2));
+        res.status(200).json({ flightInfo: `Updated flight to ${newOrigin} - ${newDestination}` });
     } catch (error) {
-        console.error(error.message)
+        console.error('Error updating flight:', error);
+        res.status(500).send('An error occurred while updating the flight.');
     }
 });
 
+app.delete('/delete-flight/:flightId', async (req, res) => {
+    try {
+        const { flightId } = req.params;
+        console.log("fid", flightId)
+        console.log(typeof flightId)
+        const data = await fs.readFile(flightDataPath, 'utf8');
+        const flights = JSON.parse(data);
+        console.log(flights)
+        // Find the index of the flight to delete
+        const flightIndex = flights.findIndex(flight =>
+            flight.flightId === parseInt(flightId)
+        );
+        console.log("findex", flightIndex)
+        if (flightIndex === -1) {
+            return res.status(404).json({ message: "Flight not found" });
+        }
+
+        // Remove the flight from the array
+        flights.splice(flightIndex, 1);
+
+        // Write the updated flights back to the file
+        await fs.writeFile(flightDataPath, JSON.stringify(flights, null, 2));
+
+        res.status(200).json({ message: "Flight deleted successfully" });
+    } catch (error) {
+        console.error('Error deleting flight:', error);
+        res.status(500).send('An error occurred while deleting the flight.');
+    }
+});
+
+
+app.post('/update-flight', async (req, res) => {
+    const { flightId } = req.body;
+    
+    if (!flightId) {
+      return res.status(400).json({ message: 'Flight ID is required' });
+    }
+  
+    console.log('Received flightId:', flightId);
+    const data = await fs.readFile(dataPath, 'utf8')
+    users = JSON.parse(data);
+    console.log(users[0].bookedFlights)
+     user = users[0].bookedFlights;
+    user.push(flightId)
+
+    await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
+    return res.status(200).send();
+    // user.push(flightId);
+
+    
+    // Read the users.json file
+    
+  });
 // const saveUsers = (updatedUsers) => {
 //     fs.writeFileSync(dataPath, JSON.stringify(updatedUsers, null, 2));
 // };
 
-app.post('/add-flight', async (req, res) => {
-    try {
-        const { username, flightId } = req.body;
-        let users = [];
 
-        try {
-            const data = await fs.readFile(dataPath, 'utf8')
-            users = JSON.parse(data);    
-        } catch (error) {
+// app.post('/add-flight', async (req, res) => {
+//     try {
+//         const { username, flightId } = req.body;
+//         let users = [];
+
+//         try {
+//             const data = await fs.readFile(dataPath, 'utf8')
+//             users = JSON.parse(data);    
+//         } catch (error) {
             
-        }
+//         }
 
-        let user = users.find(u => u.userId === userId)
+//         let user = users.find(u => u.userId === userId)
 
-        if (user) {
-            console.log(userId);
-        }
-    }catch(error){}
-})
+//         if (user) {
+//             console.log(userId);
+//         }
+//     }catch(error){}
+// })
 
 // app.post('/addFlight',async  (req, res) => {
 //     const { userId, flightId } = req.body;
@@ -197,4 +306,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-

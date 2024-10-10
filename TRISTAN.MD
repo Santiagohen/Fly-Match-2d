@@ -27,11 +27,9 @@
 > Try and be more available to help and assist in any way I can.
 
 ## DAY 4
-# 
-> 
-# 
-> 
-# 
-> 
-# 
-> 
+# What is one idea/topic that that you've revisited
+> patterns
+# What is one real world reference web site that you have visited, what appeals to you?
+> I visited SouthWest I like the layout its clean, but I wasn't looking at too many of them.
+# Have you considered how users with sight disabilities might view your site? Have you taken into account color blindness or poor vision? Do you need to reexamine or recalibrate your sites font sizes or colors?
+> No I have not considered the disabiled, but we don't think we need to recalibrate.
