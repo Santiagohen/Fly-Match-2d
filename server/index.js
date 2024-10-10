@@ -108,7 +108,9 @@ app.post('/login', async (req, res) => {
                 delete user.userId;
 
                 // send user object to client for storing in localstorage
-                res.status(200).send(user);
+                return res.status(200).send(user);
+            } else {
+                return res.status(404).send();
             }
         } else {
             res.status(400);

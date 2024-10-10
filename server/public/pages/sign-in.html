@@ -33,14 +33,16 @@
             body: JSON.stringify({ username, password })
           });
 
+          if (!response.ok) {
+            alert("Invalid username or password.");
+          }
+
           const data = await response.json();
         
           if (data) {
             localStorage.setItem("activeUser", JSON.stringify(data, null, 2));
             // comment or remove line below if you don't want to redirect to landing page
             window.location = "/"
-          } else {
-            
           }
         } catch (error) {
           console.error(error.message);
