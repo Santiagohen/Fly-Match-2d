@@ -29,6 +29,18 @@
     "username": "Myles2",
     "email": "myles2@email.com",
     "password": "$2b$10$8PMlO9GVVtOBUuE6tvb.1uJ3noZFoY54kWzL8I09WGNXUU3ATxyCe",
-    "bookedFlights": [1, 2, 3]
+    "bookedFlights": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "userId": 5,
+    "admin": false,
+    "username": "test-acc",
+    "email": "santiagohe75@gmail.com",
+    "password": "$2b$10$TpLJhPVkbVwIUxUO6oUVqOVvjDUrML98rO3lnvTDmVlpHJ6j/UWB2",
+    "bookedFlights": []
   }
 ]

@@ -16,28 +16,8 @@
     
       <input type="submit"/>
     </form>
-    <script>
-       
-    
-     
 
-              
-          async function fetchUsers() {
-        try {
-          const response = await fetch("/users");
-
-          if (!response.ok) {
-            throw new Error("Error fetching users. Response not ok");
-          }
-
-          // there could be an error getting response/fetching the endpoint
-          const users = await response.json();
-          return users;
-        } catch (error) {
-          console.error("There was a problem", error);
-        }
-      }
-
+    <script> 
       document.getElementById('login-form').addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -45,68 +25,26 @@
           const username = document.getElementById('username').value;
           const password = document.getElementById('password').value;
 
-    const response = await fetch('/users') 
-  
+          const response = await fetch('/login', {
+            method: "POST",
+            "headers": {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password })
+          });
 
-    const result = await response.json();
-  let user = result.find(u => u.username === username && u.password === password)
-    
-  if (user) {
-        // Save username and password to localStorage
-        localStorage.setItem(username, password);
-        // localStorage.setItem('password', password);
-        // window.location.href = '/sign-in';  // Redirect to the sign-in page
-        console.log('hi')
-    } else {
-        console.log("BRUH PLEASE")  // Display the error message
-        alert('not user found')
-    }
-
-  //   const result = await response.json();
-  // let user = result.find(u => u.username === username && u.password === password)
-    
-  // if (user) {
-  //       // Save username and password to localStorage
-  //       localStorage.setItem(username, password);
-  //       // localStorage.setItem('password', password);
-  //       // window.location.href = '/sign-in';  // Redirect to the sign-in page
-  //       console.log('hi')
-  //   } else {
-  //       console.log("BRUH PLEASE")  // Display the error message
-  //       alert('Tuelto')
-  //   }
-
-
-  }catch{}
-})
-//   let user = users.find(user => user.username === username && user.password === password && id === id);
-//   const username = document.getElementById('username').value
-//   const password = document.getElementById('password').value
-
-//   if(!user){
-//   console.log("On my homies so yk we hope out")
-// }else{
-//   console.log("DAWG FINALLY")
-// }
-// event.preventDefault();
-// console.log("draken");
-
-// if (user) {
-//     // Save to local storage
-//     localStorage.setItem('currentUser', JSON.stringify(user));
-//     console.log('Login successful! User data saved to local storage.');
-//   } else {
-//     console.log('Login failed! Incorrect username or password.');
-//   }
-
-// })   
-// }
-
-// loginSet(username, password);
-
-// const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-// console.log('Logged in user', currentUser)
-   
+          const data = await response.json();
+        
+          if (data) {
+            localStorage.setItem("activeUser", JSON.stringify(data, null, 2));
+            window.location = "/"
+          } else {
+            
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+      });
     </script>
 </body>
 </html>

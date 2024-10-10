@@ -52,3 +52,14 @@
 
 ## What is one way you can support your team better moving forward?
 1. > I will start working at home to make significant changes and improvement each day.
+
+# Day 6
+
+## Key Controbutions 
+
+1. > I did the backend logic making sure every endpoint was created and did what it was intended to do.
+## Polar Bear disagreement 
+1. > We had some conflicts deciding on what is a better a polar bear or staying alive and we solve it by accepting that everyone has their opinion (even though mine is right)
+
+## Adaptability.
+1. > 
