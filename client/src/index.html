@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link rel="stylesheet" href="/css/landing.css" />
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -21,7 +22,7 @@
       <section id="banner">
         <div class="bannerContainer">
           <div id="text">
-            <h2>Search for</h2> <br><h2 id="textFlights">flights</h2> <br><h2>all across <br>Latin America</h2>
+            <h2>Search for</h2> <br><h2 id="textFlights">flights</h2> <br><h2>all across </h2><h2 id="latin">Latin America</h2>
             <a href="/flights-display">
             <button class="book-now">Search</button>
             </a>
@@ -30,13 +31,51 @@
         </div>
       </section>
    
-      <section id="destinations">
+      
         <h1 id="popular">Popular Destinations</h1>
-
-        <div class="cardImages">
-          <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/ricardo-gomez-angel-L6T_6Rp2iEk-unsplash-scaled.jpg" alt="" id="placeholder">
+        <div class="wrapper">
+        <button class="arrow prev"><i class="ri-arrow-left-s-line"></i></button>
+        <button class="arrow next"><i class="ri-arrow-right-s-line"></i></button>
+        <div class="card-wrapper">
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/Santuario-de-las-Lajas-1440x1080.jpg" alt="Colombia">
+                <div class="card-info">
+                    <a href="#" class="card-title">Santuario de las Lajas, Colombia</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/Untitled-design-34.jpg" alt="Argentina">
+                <div class="card-info">
+                    <a href="#" class="card-title">Mount Fitz Roy, Argentina</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2015/05/P1010579.jpg" alt="Peru">
+                <div class="card-info">
+                    <a href="#" class="card-title">Machu Picchu, Peru</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2021/10/agustin-diaz-gargiulo-GTLJklnjn-E-unsplash-1440x1920.jpg" alt="Brazil">
+                <div class="card-info">
+                    <a href="#" class="card-title">Rio de Janeiro, Brazil</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2014/09/Screen-Shot-2014-09-11-at-6.08.46-am.png" alt="Chile">
+                <div class="card-info">
+                    <a href="#" class="card-title">Atacama Desert, Chile</a>
+                </div>
+            </div>
+            <div class="card-item">
+                <img src="https://www.worldofwanderlust.com/wp-content/uploads/2015/05/P1010626.jpg" alt="Peru">
+                <div class="card-info">
+                    <a href="#" class="card-title">Cusco, Peru</a>
+                </div>
+            </div>
         </div>
-      </section>
+    </div>
+      
 
       <section id="tips">
         <h1 id="tipsHeader">Tips On Booking Cheap Flights</h1>
@@ -53,6 +92,16 @@
             <h4>Which are the cheapest days to fly?</h4>
             <p>Analysis of domestic and international airfare prices shows that flying out on Fridays can be cheaper. Many travelers start their trips on Sundays, so your chances of a lower price are better when departing early in the week instead. Starting your trip on a Friday could be almost 11% cheaper than air travel on Sundays, so book flights online wisely*!</p>
         </div>
+        <br>
+        <div id="last-minute">
+            <h4>Is it cheaper to buy flights last minute?</h4>
+            <p>Flight tickets can be cheaper at the last minute depending on how late you’re actually booking, where you’re going, and the kind of flight you opt for. For domestic flights with Economy tickets, prices usually start to increase 3 weeks before departure, and 4 weeks for international flights, according to historical data*.</p>
+        </div>
+        <br>
+        <div id="look-out">
+            <h4>What should I look out for when booking flights?</h4>
+            <p>Several factors go into any flight booking, and you’ll need to keep an eye out for them all to ensure that you get the travel time, luggage policy, airline, and class you want. Consider which airport is closest to your ultimate destination (travelers to Los Angeles may prefer flights to LAX over flights to PSP), and make sure that the flight will accommodate all the luggage you plan on bringing. Additionally, consider the different flight classes including economy flights for functionality and premium flights if you want to enjoy a more relaxing experience.</p>
+        </div>
     </section>
 
     <footer class="footer">
@@ -64,6 +113,8 @@
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Our Services</a></li>
                         <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="/admin">Admin Page</a></li>
+
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -85,5 +136,52 @@
             </div>
         </div>
     </footer>
+
+    <script>
+      
+        const cardWrapper = document.querySelector('.card-wrapper')
+const widthToScroll = cardWrapper.children[0].offsetWidth
+const arrowPrev = document.querySelector('.arrow.prev')
+const arrowNext = document.querySelector('.arrow.next')
+const cardBounding = cardWrapper.getBoundingClientRect()
+const cardImageAndLink = cardWrapper.querySelectorAll('img, a')
+let currScroll = 0
+let initPos = 0
+let clicked = false
+
+cardImageAndLink.forEach(item=> {
+  item.setAttribute('draggable', false)
+})
+
+arrowPrev.onclick = function() {
+  cardWrapper.scrollLeft -= widthToScroll
+}
+
+arrowNext.onclick = function() {
+  cardWrapper.scrollLeft += widthToScroll
+}
+
+cardWrapper.onmousedown = function(e) {
+  cardWrapper.classList.add('grab')
+  initPos = e.clientX - cardBounding.left
+  currScroll = cardWrapper.scrollLeft
+  clicked = true
+}
+
+cardWrapper.onmousemove = function(e) {
+  if(clicked) {
+    const xPos = e.clientX - cardBounding.left
+    cardWrapper.scrollLeft = currScroll + -(xPos - initPos)
+  }
+}
+
+cardWrapper.onmouseup = mouseUpAndLeave
+cardWrapper.onmouseleave = mouseUpAndLeave
+
+function mouseUpAndLeave() {
+  cardWrapper.classList.remove('grab')
+  clicked = false
+}
+    </script>
   </body>
 </html>

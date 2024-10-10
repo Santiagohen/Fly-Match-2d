@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flights-Display</title>
+    <link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 * {
             box-sizing: border-box;
@@ -19,6 +21,9 @@
         a {
             font-size: 25px;
             font-weight: 1000;
+        }
+        a:hover {
+          text-decoration: underline;
         }
         header {
             position: sticky;
@@ -83,6 +88,12 @@ td button {
   height: 35px;
   border-radius: 50px;
 }
+td button:hover {
+  border: 3px solid black;
+}
+input{
+  text-align: center;
+}
 
 /* footer */
 .container {
@@ -135,6 +146,8 @@ ul {
 .footer-col ul li a:hover {
     padding-left: 10px;
 }
+
+
     </style>
   </head>
   <body>
@@ -146,10 +159,10 @@ ul {
             <a href="index.html">Invenire Airlines</a>
             </ul>
         </nav>
-        <a class="login" href="sign-in.html"><button id="signIn">Sign In</button></a>
+        <a class="login" href="/sign-in"><button id="signIn">Sign In</button></a>
     </header>
 
-    <input type="search" placeholder="Search">
+      <input type="search" placeholder="Search">
 
 <div id="container">
     <table id="flightTable">

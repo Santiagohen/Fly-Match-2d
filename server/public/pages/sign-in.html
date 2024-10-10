@@ -20,6 +20,9 @@
             font-size: 25px;
             font-weight: 1000;
         }
+        a:hover {
+          text-decoration: underline;
+        }
         header {
             position: sticky;
             top: 0;
@@ -53,10 +56,183 @@
             color: black;
         }
 
-        img#sideImage {
-          width: 30%;
-          height: 200px;
-        }
+       
+        svg {
+	position: fixed;
+	height: 100%;
+	z-index: -1;
+    margin-top: 150px;
+}
+
+div#Container{
+    width: 100vw;
+    height: 100vh;
+    margin-left: 35%;
+    margin-top: 50px;
+}
+
+.login-content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+
+form{
+	width: 360px;
+}
+
+.login-content img{
+    height: 100px;
+}
+
+.login-content h2{
+	margin: 15px 0;
+	color: black;
+	font-size: 2.9rem;
+}
+
+.login-content .input-div{
+	position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.login-content .input-div.one{
+	margin-top: 0;
+}
+
+.i{
+	color: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.i i{
+	transition: .3s;
+}
+
+.input-div > div{
+    position: relative;
+	height: 45px;
+}
+
+.input-div > div > h5{
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999;
+	font-size: 18px;
+	transition: .3s;
+}
+
+.input-div:before, .input-div:after{
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background-color: orange;
+	transition: .4s;
+}
+
+.input-div:before{
+	right: 50%;
+}
+
+.input-div:after{
+	left: 50%;
+}
+
+.input-div.focus:before, .input-div.focus:after{
+	width: 50%;
+}
+
+.input-div.focus > div > h5{
+	top: -5px;
+	font-size: 15px;
+}
+
+.input-div.focus > .i > i{
+	color: orange;
+}
+
+.input-div > div > input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background: none;
+	padding: 0.5rem 0.7rem;
+	font-size: 1.2rem;
+	color: black;
+}
+
+.input-div.pass{
+	margin-bottom: 4px;
+}
+
+a.account{
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: black;
+	font-size: 0.9rem;
+	transition: .3s;
+}
+
+a.account:hover{
+	color: orange;
+}
+
+.btn{
+	display: block;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: 2px solid black;
+	background-color: orange;
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: black;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+.btn:hover{
+	border: 4px solid black;
+}
+
+
+/* @media screen and (max-width: 1050px){
+	.Container{
+		grid-gap: 5rem;
+	}
+} */
+
+@media screen and (max-width: 1000px){
+	form{
+		width: 290px;
+	}
+
+	.login-content h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+    svg {
+        display: none;
+    }
+
+}
     </style>
 </head>
 <body>
@@ -72,10 +248,10 @@
     </header>
 
     
-    <img src="https://s3-us-east-2.amazonaws.com/inboxlab-ghost-blogs/2018/03/Salvador--Bahia--Brazil-streets.jpg" alt="" id="sideImage">
+    <!-- <img src="https://s3-us-east-2.amazonaws.com/inboxlab-ghost-blogs/2018/03/Salvador--Bahia--Brazil-streets.jpg" alt="" id="sideImage"> -->
     
-  <div id="Container">
-    <h1>Sign In</h1>
+  <!-- <div id="Container"> -->
+    <!-- <h1>Sign In</h1>
     <form method="POST"  action="/login" id="login-form">
 
     <label for="username">User Name: </label>
@@ -88,8 +264,47 @@
     
 
     <input type="submit" onclick="loginSet()" value="Submit" />
-    </form>
-  </div>
+    </form> -->
+    <svg width="100%" height="100%" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:lightblue;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#grad1)" d="M0,128L30,144C60,160,120,192,180,197.3C240,203,300,181,360,154.7C420,128,480,96,540,101.3C600,107,660,149,720,170.7C780,192,840,192,900,160C960,128,1020,64,1080,48C1140,32,1200,64,1260,85.3C1320,107,1380,117,1410,122.7L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320H0V128Z"/>
+      </svg>
+   
+        <div id="Container">
+            <div class="login-content">
+            <form method="POST"  action="/login" id="login-form">
+                <h2 class="title">Sign In</h2>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Username</h5>
+                        <!-- <label for="username">User Name: </label> -->
+                        <input type="text" id="username" name="username" class="input" required />
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Password</h5>
+                        <!-- <label for="password">Password:</label> -->
+                        <input type="password" id="password" name="password" class="input" required />
+                    </div>
+                </div>
+                <a href="/sign-up" class="account">Don't have an account: SIGN UP</a>
+            <input type="submit" onclick="loginSet()" value="Submit" class="btn" />
+            </form>
+          </div>
+    </div>
+  <!-- </div> -->
     <script>
        
     
@@ -204,6 +419,28 @@ document.getElementById('login-form').addEventListener('submit', async function(
 // const currentUser = JSON.parse(localStorage.getItem('currentUser'))
 // console.log('Logged in user', currentUser)
    
+
+//for the css stlye 
+const inputs = document.querySelectorAll(".input");
+
+
+function addcl(){
+	let parent = this.parentNode.parentNode;
+	parent.classList.add("focus");
+}
+
+function remcl(){
+	let parent = this.parentNode.parentNode;
+	if(this.value == ""){
+		parent.classList.remove("focus");
+	}
+}
+
+
+inputs.forEach(input => {
+	input.addEventListener("focus", addcl);
+	input.addEventListener("blur", remcl);
+});
     </script>
 </body>
 </html>
