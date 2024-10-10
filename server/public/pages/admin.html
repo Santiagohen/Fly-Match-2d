@@ -4,11 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin</title>
+    <style>
+      body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 100vh;
+    margin: 0;
+}
+
+#flight-forms, #flights-table {
+    display: flex;
+    flex-direction: column; /* Stack labels and inputs vertically */
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black; /* Optional border */
+    box-shadow: 5px 5px black;
+    border-radius: 8px; /* Optional rounded corners */
+    background-color: white; /* Background for forms */
+}
+
+.flight-form {
+    margin-bottom: 20px; /* Space between forms */
+
+}
+button, input#submit {
+    width: 100%;
+    background-color: orange;
+    border-radius: 50px;
+}
+    </style>
   </head>
   <body>
-    <div id="header">
-      <h1>Flight Manager</h1>
-    </div>
     <div id="flight-forms">
       <h1>Create Flight:</h1>
       <form method="POST" class="flight-form">
@@ -27,7 +55,7 @@
         <label for="new-time">Time:</label>
         <input type="text" id="new-time" required /><br /><br />
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" id="submit" />
       </form>
       <h1>Flight Editor</h1>
       <form id="updateForm" class="flight-form">
