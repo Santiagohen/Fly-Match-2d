@@ -113,8 +113,7 @@ app.post('/login', async (req, res) => {
                 return res.status(404).send();
             }
         } else {
-            res.status(400);
-            res.redirect('sign-in')
+            res.status(404).send();
         }
 
     } catch (error) {
