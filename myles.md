@@ -48,3 +48,15 @@ I didn't use any reference as I worked on the backend and there's really no way 
 
 ### Have you considered how users with sight disabilities might view your site? Have you taken into account color blindness or poor vision? Do you need to re-examine or recalibrate your sites font sizes or colors?
 I haven't paid too much attention to the design of our site, unfortunately. I was focused on researching login functionality, encrypting passwords, and trying to do the search function for flights.
+
+
+## 10/9/24
+### How did your team communicate throughout the project? What tools or methods were most effective?
+We spoke thoroughly to each other while working on the project in class. We didn't use any tools or anything to communicate outside of class.
+
+### How did you support your teammates, and how did they support you?
+I didn't provide support for the design, but I supported Santiago on the back end for the most part.
+
+### What are the most significant lessons you've learned from this project, both personally and professionally?
+Personally: I've started to speak up a lot more often when necessary.
+Professionally: I've learned more about working in a team, which is always a good experience.
