@@ -18,9 +18,8 @@
   {
     "userId": 3,
     "admin": false,
-    "username": "Myles",
     "email": "myles@email.com",
-    "password": "$2b$10$GIZQx4GyHDjP.NRDvi3YIeqAj5rNvUWdzIpc/7jUHzk9eootTd.Mi",
+    "password": "$2b$10$LX72rxsoKdAsB8FNZm3mRuwdbE0iqB9BpL6FuIAikc8HCz9p9mK1a",
     "bookedFlights": []
   },
   {
@@ -28,7 +27,9 @@
     "admin": false,
     "username": "Myles2",
     "email": "myles2@email.com",
-    "password": "$2b$10$8PMlO9GVVtOBUuE6tvb.1uJ3noZFoY54kWzL8I09WGNXUU3ATxyCe",
-    "bookedFlights": [1, 2, 3]
+    "password": "$2b$10$lwPAuaUPzqyZHh.ez1UehOeEAjancwpJUFaj.TNVCyhDtrcHYgU5u",
+    "bookedFlights": [
+      1
+    ]
   }
 ]

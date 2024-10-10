@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flights-Display</title>
+    <link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        a, button {
+            font-weight: 500;
+            font-size: 16px;
+            color: black;
+            text-decoration: none;
+        }
+        a {
+            font-size: 25px;
+            font-weight: 1000;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            background-color: lightblue;
+        }
+        .logo {
+            width: 50px;
+        }
+        .navLinks {
+            display: inline-block;
+            padding: 0px 20px;
+            word-spacing: 10px;
+            letter-spacing: 5px;
+        }
+        button#signIn {
+            padding: 9px 25px;
+            background-color: rgb(8, 8, 8);
+            border: none;
+            border-radius: 50px;
+            color:white;
+            transition: all 1.2s ease 0s;
+        }
+        button#signIn:hover {
+            /* background-color: rgba(0,136,169,0.8); */
+            background-color: rgb(240, 121, 9, 1);
+            color: black;
+        }
+
+input {
+  width: 65%;
+  height: 45px;
+  border: 3px solid black;
+  border-radius: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+      #flightTable {
+  margin: auto;
+  width: 80%;
+  border-collapse: collapse; /* Optional: for cleaner table borders */
+  margin-top: 60px;
+}
+
+#flightTable th, #flightTable td {
+  text-align: center; /* Center content in table cells */
+  padding: 20px; /* Add some padding for better spacing */
+  border: 1.5px solid #000000; /* Optional: Add borders to cells */
+}
+
+td button {
+  background-color: orange;
+  width: 80%;
+  height: 35px;
+  border-radius: 50px;
+}
+td button:hover {
+  border: 3px solid black;
+}
+input{
+  text-align: center;
+}
+
+/* footer */
+.container {
+    max-width: 1170px;
+    margin: auto;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+ul {
+    list-style: none;
+}
+.footer {
+    background-color: lightblue;
+    padding: 70px 0;
+    margin-top: 50px;
+}
+.footer-col {
+    width: 33.3%;
+    padding: 0 25px;
+}
+.footer-col h4 {
+    font-size: 18px;
+    color: black;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: orange;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+.footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+.footer-col ul li a {
+    font-size: 16px;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+.footer-col ul li a:hover {
+    padding-left: 10px;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+        <img class="logo" src="image/logo.svg" alt="logo">
+
+        <nav>
+            <ul class="navLinks">
+            <a href="index.html">Invenire Airlines</a>
+            </ul>
+        </nav>
+        <a class="login" href="/sign-in"><button id="signIn">Sign In</button></a>
+    </header>
+
+      <input type="search" id="search-input" placeholder="Search">
+
+<div id="container">
+    <table id="flightTable">
+      <thead>
+        <tr>
+          <th>Origin:</th>
+          <th>Destination:</th>
+          <th>Date:</th>
+          <th>Time:</th>
+          <th>Book Now</th>
+        </tr>
+      </thead>
+      <tbody id="flightTableBody">
+        <!-- data of users will be rendered here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#">All Accommodation Types</a></li>
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Car Rentals</a></li>
+                        <li><a href="#">Vacation packages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">Get Help</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    <script>
+      async function fetchFlights() {
+        try {
+          const response = await fetch("/flights");
+          if (!response.ok) {
+            throw new Error("Error fetching flights. Response not ok");
+          }
+          console.log(response);
+          const flights = await response.json();
+          return flights;
+        } catch (error) {
+          console.error("There was a problem");
+          console.error(error);
+        }
+      }
+
+      async function renderFlights() {
+        const tableBody = document.getElementById("flightTableBody");
+        tableBody.innerHTML = "";
+        try {
+          const flights = await fetchFlights();
+          if (Array.isArray(flights) && flights.length > 0) {
+            flights.forEach((flight) => {
+              const row = `<tr><td>${flight.origin}</td><td>${flight.destination}</td><td>${flight.date}</td><td>${flight.time}</td><td><button type="button" flightid="${flight.flightId}" class="book-flight-btn">BOOK</button></td></tr>`;
+              tableBody.innerHTML += row;
+              addBookFlightEventListeners();
+              return true;
+            });
+          }
+        } catch (error) {}
+      }
+
+      async function searchFlights() {
+            try {
+                const flights = await fetchFlights();
+                const input = document.getElementById("search-input").value.toLowerCase();
+                const resultsDisplay = document.getElementById("flightTableBody");
+                resultsDisplay.innerHTML = "";
+
+                let results;
+
+                console.log(input)
+
+                if (input) {
+                    results = flights.filter(flight => {
+                        return Object.values(flight).some(value => value.toString().toLowerCase().includes(input));
+                    });
+                } else {
+                    results = flights;
+                }
+
+                if (results.length > 0) {
+                    results.forEach(item => {
+                      const row = `<tr><td>${item.origin}</td><td>${item.destination}</td><td>${item.date}</td><td>${item.time}</td><td><button type="button" flightid="${item.flightId}" class="book-flight-btn">BOOK</button></td></tr>`;
+                      resultsDisplay.innerHTML += row;
+                      addBookFlightEventListeners();
+                    });
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+      const searchInput = document.getElementById("search-input");
+      searchInput.addEventListener("keydown", searchFlights);
+      searchInput.addEventListener("keyup", searchFlights);
+
+      function addBookFlightEventListeners() {
+        const bookButtons = document.querySelectorAll(".book-flight-btn");
+      console.log(bookButtons)
+
+      bookButtons.forEach(btn => {
+        btn.addEventListener("click", async () => {
+          console.log("clicked")
+          try {
+            const flightId = parseInt(btn.getAttribute("flightid"));
+            const userId = JSON.parse(localStorage.getItem("activeUser")).userId;
+
+            const response = await fetch("/user/add-flight", {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({userId, flightId})
+            });
+
+            if (!response.ok) {
+              return
+            }
+
+            let activeUser = JSON.parse(localStorage.getItem("activeUser"));
+
+            if (activeUser) {
+              activeUser.bookedFlights.push(flightId);
+              localStorage.setItem("activeUser", JSON.stringify(activeUser, null, 2));
+            }
+          } catch (error) {
+            console.error(error.message);
+          }
+        });
+      });
+      }
+
+      document.addEventListener("DOMContentLoaded", renderFlights);
+    </script>
+  </body>
+</html>

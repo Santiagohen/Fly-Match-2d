@@ -1,10 +1,50 @@
 [
-    {
-        "flightId": 1,
-        "origin": "Some City",
-        "destination": "Some Other City",
-        "date": "some date",
-        "time": "00:00",
-        "passengers": []
-    }
+  {
+    "flightId": 1,
+    "origin": "Phoenix, Arizona",
+    "destination": "Houston, Texas",
+    "date": "10/24/2024",
+    "time": "08:30",
+    "passengers": [
+      1,
+      1,
+      1,
+      1,
+      4
+    ]
+  },
+  {
+    "flightId": 2,
+    "origin": "Seattle, Washington",
+    "destination": "Chicago, Illinois",
+    "date": "8/23/1912",
+    "time": "03:45",
+    "passengers": [
+      1
+    ]
+  },
+  {
+    "flightId": 3,
+    "origin": "Las Vegas, Nevada",
+    "destination": "San Diego, California",
+    "date": "01/01/2025",
+    "time": "12:00",
+    "passengers": []
+  },
+  {
+    "flightId": 4,
+    "origin": "Dallas, Texas",
+    "destination": "Jacksonville, Florida",
+    "date": "12/06/2003",
+    "time": "09:36",
+    "passengers": []
+  },
+  {
+    "flightId": 5,
+    "origin": "Las Vegas, Nevada",
+    "destination": "Portland, Oregon",
+    "date": "05/06/2006",
+    "time": "08:00",
+    "passengers": []
+  }
 ]
